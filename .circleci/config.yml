@@ -1,0 +1,25 @@
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build-plugin:
+          context:
+            - unreal-engine-ci
+
+version: 2
+jobs:
+  build-plugin:
+    docker:
+      - image: ghcr.io/epicgames/unreal-engine:dev-slim-5.0
+        auth:
+          username: $GHCR_USERNAME
+          password: $GHCR_PASSWORD
+    steps:
+      - checkout
+      - run:
+          name: "Build Plugin"
+          command: |
+            /home/ue4/UnrealEngine/Engine/Build/BatchFiles/RunUAT.sh BuildPlugin \
+              -Plugin=${PWD}/SamplePlugin/SamplePlugin.uplugin \
+              -Package=/tmp \
+              -Rocket
