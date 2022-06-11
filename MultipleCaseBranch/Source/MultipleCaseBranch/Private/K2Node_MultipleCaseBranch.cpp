@@ -155,7 +155,7 @@ void UK2Node_MultipleCaseBranch::AllocateDefaultPins()
 
 FText UK2Node_MultipleCaseBranch::GetTooltipText() const
 {
-	return LOCTEXT("MultipleCaseBranchStatement_Tooltip", "MultipleCaseBranch Statement\nExecution goes where condition is true");
+	return LOCTEXT("MultipleCaseBranchStatement_Tooltip", "Multiple Case Branch Statement\nExecution goes where condition is true");
 }
 
 FLinearColor UK2Node_MultipleCaseBranch::GetNodeTitleColor() const
@@ -165,7 +165,7 @@ FLinearColor UK2Node_MultipleCaseBranch::GetNodeTitleColor() const
 
 FText UK2Node_MultipleCaseBranch::GetNodeTitle(ENodeTitleType::Type TitleType) const
 {
-	return LOCTEXT("MultipleCaseBranch", "MultipleCaseBranch");
+	return LOCTEXT("MultipleCaseBranch", "Multiple Case Branch");
 }
 
 FSlateIcon UK2Node_MultipleCaseBranch::GetIconAndTint(FLinearColor& OutColor) const
@@ -181,7 +181,7 @@ void UK2Node_MultipleCaseBranch::GetNodeContextMenuActions(class UToolMenu* Menu
 	if (!Context->bIsDebugging)
 	{
 		FToolMenuSection& Section =
-			Menu->AddSection("K2NodeMultipleCaseBranch", NSLOCTEXT("K2Nodes", "MultipleCaseBranchHeader", "MultipleCaseBranch"));
+			Menu->AddSection("K2NodeMultipleCaseBranch", NSLOCTEXT("K2Nodes", "MultipleCaseBranchHeader", "Multiple Case Branch"));
 
 		if (Context->Node->Pins.Num() >= 1)
 		{
@@ -321,7 +321,9 @@ void UK2Node_MultipleCaseBranch::AddCasePinAfter(UEdGraphPin* Pin)
 			UEdGraphPin* CaseExecPin = CasePairs[Index].Value;
 
 			CaseExecPin->PinName = *GetCasePinName(CaseExecPinNamePrefix.ToString(), Index + 1);
+			CaseExecPin->PinFriendlyName = FText::AsCultureInvariant(GetCasePinFriendlyName(CaseExecPinFriendlyNamePrefix.ToString(), Index + 1));
 			CaseCondPin->PinName = *GetCasePinName(CaseCondPinNamePrefix.ToString(), Index + 1);
+			CaseCondPin->PinFriendlyName = FText::AsCultureInvariant(GetCasePinFriendlyName(CaseCondPinFriendlyNamePrefix.ToString(), Index + 1));
 		}
 
 		FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(GetBlueprint());
@@ -361,7 +363,9 @@ void UK2Node_MultipleCaseBranch::AddCasePinBefore(UEdGraphPin* Pin)
 			UEdGraphPin* CaseExecPin = CasePairs[Index].Value;
 
 			CaseExecPin->PinName = *GetCasePinName(CaseExecPinNamePrefix.ToString(), Index + 1);
+			CaseExecPin->PinFriendlyName = FText::AsCultureInvariant(GetCasePinFriendlyName(CaseExecPinFriendlyNamePrefix.ToString(), Index + 1));
 			CaseCondPin->PinName = *GetCasePinName(CaseCondPinNamePrefix.ToString(), Index + 1);
+			CaseCondPin->PinFriendlyName = FText::AsCultureInvariant(GetCasePinFriendlyName(CaseCondPinFriendlyNamePrefix.ToString(), Index + 1));
 		}
 
 		FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(GetBlueprint());
@@ -504,7 +508,9 @@ void UK2Node_MultipleCaseBranch::RemoveCasePinAt(int32 CaseIndex)
 			UEdGraphPin* CaseCondPin = GetCondPinFromExecPin(CaseExecPin);
 
 			CaseExecPin->PinName = *GetCasePinName(CaseExecPinNamePrefix.ToString(), Index);
+			CaseExecPin->PinFriendlyName = FText::AsCultureInvariant(GetCasePinFriendlyName(CaseExecPinFriendlyNamePrefix.ToString(), Index));
 			CaseCondPin->PinName = *GetCasePinName(CaseCondPinNamePrefix.ToString(), Index);
+			CaseCondPin->PinFriendlyName = FText::AsCultureInvariant(GetCasePinFriendlyName(CaseCondPinFriendlyNamePrefix.ToString(), Index));
 
 			++Index;
 		}
