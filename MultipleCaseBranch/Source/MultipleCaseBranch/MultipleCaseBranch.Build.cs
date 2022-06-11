@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class SamplePlugin : ModuleRules
+public class MultipleCaseBranch : ModuleRules
 {
-	public SamplePlugin(ReadOnlyTargetRules Target) : base(Target)
+	public MultipleCaseBranch(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 

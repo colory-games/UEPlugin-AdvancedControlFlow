@@ -20,6 +20,6 @@ jobs:
           name: "Build Plugin"
           command: |
             /home/ue4/UnrealEngine/Engine/Build/BatchFiles/RunUAT.sh BuildPlugin \
-              -Plugin=${PWD}/SamplePlugin/SamplePlugin.uplugin \
+              -Plugin=${PWD}/MultipleCaseBranch/MultipleCaseBranch.uplugin \
               -Package=/tmp \
               -Rocket
