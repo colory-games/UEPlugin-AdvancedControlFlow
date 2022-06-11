@@ -18,20 +18,19 @@
 
 namespace
 {
-	static const FName DefaultExecPinName(TEXT("DefaultExec"));
-	static const FName CaseExecPinNamePrefix(TEXT("CaseExec"));
-	static const FName CaseCondPinNamePrefix(TEXT("CaseCond"));
-	static const FName DefaultExecPinFriendlyName(TEXT("Default"));
-	static const FName CaseExecPinFriendlyNamePrefix(TEXT("Case"));
-	static const FName CaseCondPinFriendlyNamePrefix(TEXT("Case"));
-}
+static const FName DefaultExecPinName(TEXT("DefaultExec"));
+static const FName CaseExecPinNamePrefix(TEXT("CaseExec"));
+static const FName CaseCondPinNamePrefix(TEXT("CaseCond"));
+static const FName DefaultExecPinFriendlyName(TEXT("Default"));
+static const FName CaseExecPinFriendlyNamePrefix(TEXT("Case"));
+static const FName CaseCondPinFriendlyNamePrefix(TEXT("Case"));
+}	// namespace
 
 class FKCHandler_MultipleCaseBranch : public FNodeHandlingFunctor
 {
 	TMap<UEdGraphNode*, FBPTerminal*> BoolTermMap;
 
 public:
-
 	FKCHandler_MultipleCaseBranch(FKismetCompilerContext& InCompilerContext) : FNodeHandlingFunctor(InCompilerContext)
 	{
 	}
@@ -57,15 +56,19 @@ public:
 		ExpectedExecPinType.PinCategory = UEdGraphSchema_K2::PC_Exec;
 
 		{
-			UEdGraphPin* ExecTriggeringPin = Context.FindRequiredPinByName(MultipleCaseBranchNode, UEdGraphSchema_K2::PN_Execute, EGPD_Input);
+			UEdGraphPin* ExecTriggeringPin = 
+				Context.FindRequiredPinByName(MultipleCaseBranchNode, UEdGraphSchema_K2::PN_Execute, EGPD_Input);
 			if ((ExecTriggeringPin == nullptr) || !Context.ValidatePinType(ExecTriggeringPin, ExpectedExecPinType))
 			{
-				CompilerContext.MessageLog.Error(*LOCTEXT("NoValidExecutionPinForMultipleCaseBranch_Error", "@@ must have a valid execution pin @@").ToString(), MultipleCaseBranchNode, ExecTriggeringPin);
+				CompilerContext.MessageLog.Error(
+					*LOCTEXT("NoValidExecutionPinForMultipleCaseBranch_Error", "@@ must have a valid execution pin @@").ToString(),
+					MultipleCaseBranchNode, ExecTriggeringPin);
 				return;
 			}
 			else if (ExecTriggeringPin->LinkedTo.Num() == 0)
 			{
-				CompilerContext.MessageLog.Warning(*LOCTEXT("NodeNeverExecuted_Warning", "@@ will never be executed").ToString(), MultipleCaseBranchNode);
+				CompilerContext.MessageLog.Warning(
+					*LOCTEXT("NodeNeverExecuted_Warning", "@@ will never be executed").ToString(), MultipleCaseBranchNode);
 				return;
 			}
 		}
@@ -83,7 +86,7 @@ public:
 		for (auto PinIt = MultipleCaseBranchNode->Pins.CreateIterator(); PinIt; ++PinIt)
 		{
 			UEdGraphPin* ExecPin = *PinIt;
-				
+
 			if (ExecPin->Direction != EGPD_Output)
 			{
 				continue;
@@ -181,38 +184,18 @@ void UK2Node_MultipleCaseBranch::GetNodeContextMenuActions(class UToolMenu* Menu
 
 		if (Context->Node->Pins.Num() >= 1)
 		{
-			Section.AddMenuEntry(
-				"AddCasePinBefore",
-				LOCTEXT("AddCasePinBefore", "Add case pin before"),
-				LOCTEXT("AddCasePinBeforeTooltip", "Add case pin before this pin on this node"),
-				FSlateIcon(),
+			Section.AddMenuEntry("AddCasePinBefore", LOCTEXT("AddCasePinBefore", "Add case pin before"),
+				LOCTEXT("AddCasePinBeforeTooltip", "Add case pin before this pin on this node"), FSlateIcon(),
+				FUIAction(FExecuteAction::CreateUObject(const_cast<UK2Node_MultipleCaseBranch*>(this),
+					&UK2Node_MultipleCaseBranch::AddCasePinBefore, const_cast<UEdGraphPin*>(Context->Pin))));
+			Section.AddMenuEntry("AddCasePinAfter", LOCTEXT("AddCasePinAfter", "Add case pin after"),
+				LOCTEXT("AddCasePinAfterTooltip", "Add case pin after this pin on this node"), FSlateIcon(),
+				FUIAction(FExecuteAction::CreateUObject(const_cast<UK2Node_MultipleCaseBranch*>(this),
+					&UK2Node_MultipleCaseBranch::AddCasePinAfter, const_cast<UEdGraphPin*>(Context->Pin))));
+			Section.AddMenuEntry("RemoveFirstCasePin", LOCTEXT("RemoveFirstCasePin", "Remove first case pin"),
+				LOCTEXT("RemoveFirstCasePinTooltip", "Remove first case pin on this node"), FSlateIcon(),
 				FUIAction(FExecuteAction::CreateUObject(
-					const_cast<UK2Node_MultipleCaseBranch*>(this),
-					&UK2Node_MultipleCaseBranch::AddCasePinBefore,
-					const_cast<UEdGraphPin*>(Context->Pin)
-				))
-			);
-			Section.AddMenuEntry(
-				"AddCasePinAfter",
-				LOCTEXT("AddCasePinAfter", "Add case pin after"),
-				LOCTEXT("AddCasePinAfterTooltip", "Add case pin after this pin on this node"),
-				FSlateIcon(),
-				FUIAction(FExecuteAction::CreateUObject(
-					const_cast<UK2Node_MultipleCaseBranch*>(this),
-					&UK2Node_MultipleCaseBranch::AddCasePinAfter,
-					const_cast<UEdGraphPin*>(Context->Pin)
-				))
-			);
-			Section.AddMenuEntry(
-				"RemoveFirstCasePin",
-				LOCTEXT("RemoveFirstCasePin", "Remove first case pin"),
-				LOCTEXT("RemoveFirstCasePinTooltip", "Remove first case pin on this node"),
-				FSlateIcon(),
-				FUIAction(FExecuteAction::CreateUObject(
-					const_cast<UK2Node_MultipleCaseBranch*>(this),
-					&UK2Node_MultipleCaseBranch::RemoveFirstCasePin
-				))
-			);
+					const_cast<UK2Node_MultipleCaseBranch*>(this), &UK2Node_MultipleCaseBranch::RemoveFirstCasePin)));
 			Section.AddMenuEntry(
 				"RemoveLastCasePin",
 				LOCTEXT("RemoveLastCasePin", "Remove last case pin"),
@@ -227,17 +210,10 @@ void UK2Node_MultipleCaseBranch::GetNodeContextMenuActions(class UToolMenu* Menu
 
 		if (Context->Pin != nullptr)
 		{
-			Section.AddMenuEntry(
-				"RemoveThisCasePin",
-				LOCTEXT("RemoveThisCasePin", "Remove this case pin"),
-				LOCTEXT("RemoveThisCasePinTooltip", "Remove this case pin on this node"),
-				FSlateIcon(),
-				FUIAction(FExecuteAction::CreateUObject(
-					const_cast<UK2Node_MultipleCaseBranch*>(this),
-					&UK2Node_MultipleCaseBranch::RemoveInputPin,
-					const_cast<UEdGraphPin*>(Context->Pin)
-				))
-			);
+			Section.AddMenuEntry("RemoveThisCasePin", LOCTEXT("RemoveThisCasePin", "Remove this case pin"),
+				LOCTEXT("RemoveThisCasePinTooltip", "Remove this case pin on this node"), FSlateIcon(),
+				FUIAction(FExecuteAction::CreateUObject(const_cast<UK2Node_MultipleCaseBranch*>(this),
+					&UK2Node_MultipleCaseBranch::RemoveInputPin, const_cast<UEdGraphPin*>(Context->Pin))));
 		}
 	}
 }
@@ -607,14 +583,18 @@ CasePinPair UK2Node_MultipleCaseBranch::AddCasePinPair(int32 CaseIndex)
 	{
 		FCreatePinParams Params;
 		Params.Index = 3 + CaseIndex;
-		Pair.Key = CreatePin(EGPD_Input, UEdGraphSchema_K2::PC_Boolean, *GetCasePinName(CaseCondPinNamePrefix.ToString(), CaseIndex), Params);
-		Pair.Key->PinFriendlyName = FText::AsCultureInvariant(GetCasePinFriendlyName(CaseCondPinFriendlyNamePrefix.ToString(), CaseIndex));
+		Pair.Key = CreatePin(
+			EGPD_Input, UEdGraphSchema_K2::PC_Boolean, *GetCasePinName(CaseCondPinNamePrefix.ToString(), CaseIndex), Params);
+		Pair.Key->PinFriendlyName =
+			FText::AsCultureInvariant(GetCasePinFriendlyName(CaseCondPinFriendlyNamePrefix.ToString(), CaseIndex));
 	}
 	{
 		FCreatePinParams Params;
 		Params.Index = 3 + N + CaseIndex + 1;
-		Pair.Value = CreatePin(EGPD_Output, UEdGraphSchema_K2::PC_Exec, *GetCasePinName(CaseExecPinNamePrefix.ToString(), CaseIndex), Params);
-		Pair.Value->PinFriendlyName = FText::AsCultureInvariant(GetCasePinFriendlyName(CaseExecPinFriendlyNamePrefix.ToString(), CaseIndex));
+		Pair.Value = CreatePin(
+			EGPD_Output, UEdGraphSchema_K2::PC_Exec, *GetCasePinName(CaseExecPinNamePrefix.ToString(), CaseIndex), Params);
+		Pair.Value->PinFriendlyName =
+			FText::AsCultureInvariant(GetCasePinFriendlyName(CaseExecPinFriendlyNamePrefix.ToString(), CaseIndex));
 	}
 
 	return Pair;
@@ -687,8 +667,8 @@ void UK2Node_MultipleCaseBranch::CreateFunctionPin()
 {
 	FCreatePinParams Params;
 	Params.Index = 2;
-	UEdGraphPin* FunctionPin = CreatePin(EGPD_Input, UEdGraphSchema_K2::PC_Object,
-		ConditionPreProcessFuncClass, ConditionPreProcessFuncName, Params);
+	UEdGraphPin* FunctionPin =
+		CreatePin(EGPD_Input, UEdGraphSchema_K2::PC_Object, ConditionPreProcessFuncClass, ConditionPreProcessFuncName, Params);
 	FunctionPin->bDefaultValueIsReadOnly = true;
 	FunctionPin->bNotConnectable = true;
 	FunctionPin->bHidden = true;

@@ -27,9 +27,18 @@ class UK2Node_MultipleCaseBranch : public UK2Node, public IK2Node_AddPinInterfac
 	virtual class FNodeHandlingFunctor* CreateNodeHandler(class FKismetCompilerContext& CompilerContext) const override;
 	virtual void GetMenuActions(FBlueprintActionDatabaseRegistrar& ActionRegistrar) const override;
 	virtual FText GetMenuCategory() const override;
-	virtual bool CanEverInsertExecutionPin() const override { return true; }
-	virtual bool CanEverRemoveExecutionPin() const override { return true; }
-	virtual bool IncludeParentNodeContextMenu() const override { return true; }
+	virtual bool CanEverInsertExecutionPin() const override
+	{
+		return true;
+	}
+	virtual bool CanEverRemoveExecutionPin() const override
+	{
+		return true;
+	}
+	virtual bool IncludeParentNodeContextMenu() const override
+	{
+		return true;
+	}
 
 	// Override from IK2Node_AddPinInterface
 	virtual void AddInputPin() override;
@@ -58,7 +67,6 @@ class UK2Node_MultipleCaseBranch : public UK2Node, public IK2Node_AddPinInterfac
 	CasePinPair AddCasePinPair(int32 CaseIndex);
 
 protected:
-
 	TSubclassOf<class UObject> ConditionPreProcessFuncClass;
 	FName ConditionPreProcessFuncName;
 
@@ -67,7 +75,6 @@ protected:
 	virtual void CreateFunctionPin();
 
 public:
-
 	UK2Node_MultipleCaseBranch(const FObjectInitializer& ObjectInitializer);
 
 	UEdGraphPin* GetDefaultExecPin() const;
