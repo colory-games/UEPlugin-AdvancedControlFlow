@@ -24,7 +24,7 @@ static const FName CaseCondPinNamePrefix(TEXT("CaseCond"));
 static const FName DefaultExecPinFriendlyName(TEXT("Default"));
 static const FName CaseExecPinFriendlyNamePrefix(TEXT("Case"));
 static const FName CaseCondPinFriendlyNamePrefix(TEXT("Case"));
-}	// namespace
+}	 // namespace
 
 class FKCHandler_MultipleCaseBranch : public FNodeHandlingFunctor
 {
@@ -180,7 +180,8 @@ void UK2Node_MultipleCaseBranch::GetNodeContextMenuActions(class UToolMenu* Menu
 
 	if (!Context->bIsDebugging)
 	{
-		FToolMenuSection& Section = Menu->AddSection("K2NodeMultipleCaseBranch", NSLOCTEXT("K2Nodes", "MultipleCaseBranchHeader", "MultipleCaseBranch"));
+		FToolMenuSection& Section =
+			Menu->AddSection("K2NodeMultipleCaseBranch", NSLOCTEXT("K2Nodes", "MultipleCaseBranchHeader", "MultipleCaseBranch"));
 
 		if (Context->Node->Pins.Num() >= 1)
 		{
@@ -196,16 +197,11 @@ void UK2Node_MultipleCaseBranch::GetNodeContextMenuActions(class UToolMenu* Menu
 				LOCTEXT("RemoveFirstCasePinTooltip", "Remove first case pin on this node"), FSlateIcon(),
 				FUIAction(FExecuteAction::CreateUObject(
 					const_cast<UK2Node_MultipleCaseBranch*>(this), &UK2Node_MultipleCaseBranch::RemoveFirstCasePin)));
-			Section.AddMenuEntry(
-				"RemoveLastCasePin",
-				LOCTEXT("RemoveLastCasePin", "Remove last case pin"),
+			Section.AddMenuEntry("RemoveLastCasePin", LOCTEXT("RemoveLastCasePin", "Remove last case pin"),
 				LOCTEXT("RemoveLastCasePinTooltip", "Remove last case pin on this node"),
 				FSlateIcon(),
 				FUIAction(FExecuteAction::CreateUObject(
-					const_cast<UK2Node_MultipleCaseBranch*>(this),
-					&UK2Node_MultipleCaseBranch::RemoveLastCasePin
-				))
-			);
+					const_cast<UK2Node_MultipleCaseBranch*>(this), &UK2Node_MultipleCaseBranch::RemoveLastCasePin)));
 		}
 
 		if (Context->Pin != nullptr)
