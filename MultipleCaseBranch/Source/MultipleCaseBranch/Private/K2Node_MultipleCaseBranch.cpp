@@ -3,15 +3,15 @@
 #include "K2Node_MultipleCaseBranch.h"
 
 #include "BlueprintNodeSpawner.h"
-#include "GraphEditorSettings.h"
-#include "EditorCategoryUtils.h"
 #include "EdGraphSchema_K2.h"
 #include "EdGraphUtilities.h"
-#include "KismetCompiler.h"
-#include "KismetCompilerMisc.h"
+#include "EditorCategoryUtils.h"
+#include "GraphEditorSettings.h"
 #include "KismetCompiledFunctionContext.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet2/BlueprintEditorUtils.h"
+#include "KismetCompiler.h"
+#include "KismetCompilerMisc.h"
 #include "ToolMenu.h"
 
 #define LOCTEXT_NAMESPACE "K2Node"
@@ -56,7 +56,7 @@ public:
 		ExpectedExecPinType.PinCategory = UEdGraphSchema_K2::PC_Exec;
 
 		{
-			UEdGraphPin* ExecTriggeringPin = 
+			UEdGraphPin* ExecTriggeringPin =
 				Context.FindRequiredPinByName(MultipleCaseBranchNode, UEdGraphSchema_K2::PN_Execute, EGPD_Input);
 			if ((ExecTriggeringPin == nullptr) || !Context.ValidatePinType(ExecTriggeringPin, ExpectedExecPinType))
 			{
@@ -198,8 +198,7 @@ void UK2Node_MultipleCaseBranch::GetNodeContextMenuActions(class UToolMenu* Menu
 				FUIAction(FExecuteAction::CreateUObject(
 					const_cast<UK2Node_MultipleCaseBranch*>(this), &UK2Node_MultipleCaseBranch::RemoveFirstCasePin)));
 			Section.AddMenuEntry("RemoveLastCasePin", LOCTEXT("RemoveLastCasePin", "Remove last case pin"),
-				LOCTEXT("RemoveLastCasePinTooltip", "Remove last case pin on this node"),
-				FSlateIcon(),
+				LOCTEXT("RemoveLastCasePinTooltip", "Remove last case pin on this node"), FSlateIcon(),
 				FUIAction(FExecuteAction::CreateUObject(
 					const_cast<UK2Node_MultipleCaseBranch*>(this), &UK2Node_MultipleCaseBranch::RemoveLastCasePin)));
 		}
@@ -321,9 +320,11 @@ void UK2Node_MultipleCaseBranch::AddCasePinAfter(UEdGraphPin* Pin)
 			UEdGraphPin* CaseExecPin = CasePairs[Index].Value;
 
 			CaseExecPin->PinName = *GetCasePinName(CaseExecPinNamePrefix.ToString(), Index + 1);
-			CaseExecPin->PinFriendlyName = FText::AsCultureInvariant(GetCasePinFriendlyName(CaseExecPinFriendlyNamePrefix.ToString(), Index + 1));
+			CaseExecPin->PinFriendlyName =
+				FText::AsCultureInvariant(GetCasePinFriendlyName(CaseExecPinFriendlyNamePrefix.ToString(), Index + 1));
 			CaseCondPin->PinName = *GetCasePinName(CaseCondPinNamePrefix.ToString(), Index + 1);
-			CaseCondPin->PinFriendlyName = FText::AsCultureInvariant(GetCasePinFriendlyName(CaseCondPinFriendlyNamePrefix.ToString(), Index + 1));
+			CaseCondPin->PinFriendlyName =
+				FText::AsCultureInvariant(GetCasePinFriendlyName(CaseCondPinFriendlyNamePrefix.ToString(), Index + 1));
 		}
 
 		FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(GetBlueprint());
@@ -363,9 +364,11 @@ void UK2Node_MultipleCaseBranch::AddCasePinBefore(UEdGraphPin* Pin)
 			UEdGraphPin* CaseExecPin = CasePairs[Index].Value;
 
 			CaseExecPin->PinName = *GetCasePinName(CaseExecPinNamePrefix.ToString(), Index + 1);
-			CaseExecPin->PinFriendlyName = FText::AsCultureInvariant(GetCasePinFriendlyName(CaseExecPinFriendlyNamePrefix.ToString(), Index + 1));
+			CaseExecPin->PinFriendlyName =
+				FText::AsCultureInvariant(GetCasePinFriendlyName(CaseExecPinFriendlyNamePrefix.ToString(), Index + 1));
 			CaseCondPin->PinName = *GetCasePinName(CaseCondPinNamePrefix.ToString(), Index + 1);
-			CaseCondPin->PinFriendlyName = FText::AsCultureInvariant(GetCasePinFriendlyName(CaseCondPinFriendlyNamePrefix.ToString(), Index + 1));
+			CaseCondPin->PinFriendlyName =
+				FText::AsCultureInvariant(GetCasePinFriendlyName(CaseCondPinFriendlyNamePrefix.ToString(), Index + 1));
 		}
 
 		FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(GetBlueprint());
@@ -508,9 +511,11 @@ void UK2Node_MultipleCaseBranch::RemoveCasePinAt(int32 CaseIndex)
 			UEdGraphPin* CaseCondPin = GetCondPinFromExecPin(CaseExecPin);
 
 			CaseExecPin->PinName = *GetCasePinName(CaseExecPinNamePrefix.ToString(), Index);
-			CaseExecPin->PinFriendlyName = FText::AsCultureInvariant(GetCasePinFriendlyName(CaseExecPinFriendlyNamePrefix.ToString(), Index));
+			CaseExecPin->PinFriendlyName =
+				FText::AsCultureInvariant(GetCasePinFriendlyName(CaseExecPinFriendlyNamePrefix.ToString(), Index));
 			CaseCondPin->PinName = *GetCasePinName(CaseCondPinNamePrefix.ToString(), Index);
-			CaseCondPin->PinFriendlyName = FText::AsCultureInvariant(GetCasePinFriendlyName(CaseCondPinFriendlyNamePrefix.ToString(), Index));
+			CaseCondPin->PinFriendlyName =
+				FText::AsCultureInvariant(GetCasePinFriendlyName(CaseCondPinFriendlyNamePrefix.ToString(), Index));
 
 			++Index;
 		}
