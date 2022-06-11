@@ -2,11 +2,11 @@
   "FileVersion": 3,
   "Version": 1,
   "VersionName": "0.1",
-  "FriendlyName": "Sample Plugin",
-  "Description": "Sample Plugin",
+  "FriendlyName": "Multiple Case Branch",
+  "Description": "Blueprint Node: Multiple Case Branch",
   "Category": "Other",
   "CreatedBy": "nutti (Colory Games)",
-  "CreatedByURL": "https://github.com/colory-games/UnrealEngineProject-CI",
+  "CreatedByURL": "https://github.com/colory-games/UEPlugin-MultipleCaseBranch",
   "DocsURL": "",
   "MarketplaceURL": "",
   "SupportURL": "",
@@ -15,7 +15,7 @@
   "Installed": false,
   "Modules": [
     {
-      "Name": "SamplePlugin",
+      "Name": "MultipleCaseBranch",
       "Type": "Runtime",
       "LoadingPhase": "PreLoadingScreen"
     }
