@@ -133,6 +133,8 @@ UK2Node_MultipleCaseBranch::UK2Node_MultipleCaseBranch(const FObjectInitializer&
 	ConditionPreProcessFuncName = TEXT("Not_PreBool");
 }
 
+#if WITH_EDITOR
+
 void UK2Node_MultipleCaseBranch::AllocateDefaultPins()
 {
 	// Pin structure
@@ -173,6 +175,8 @@ FSlateIcon UK2Node_MultipleCaseBranch::GetIconAndTint(FLinearColor& OutColor) co
 	static FSlateIcon Icon("EditorStyle", "GraphEditor.Branch_16x");
 	return Icon;
 }
+
+#endif
 
 void UK2Node_MultipleCaseBranch::GetNodeContextMenuActions(class UToolMenu* Menu, class UGraphNodeContextMenuContext* Context) const
 {

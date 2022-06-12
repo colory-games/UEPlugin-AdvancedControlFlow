@@ -14,12 +14,14 @@ class UK2Node_MultipleCaseBranch : public UK2Node, public IK2Node_AddPinInterfac
 {
 	GENERATED_BODY()
 
+#if WITH_EDITOR
 	// Override from UEdGraphNode
 	virtual void AllocateDefaultPins() override;
 	virtual FText GetTooltipText() const override;
 	virtual FLinearColor GetNodeTitleColor() const override;
 	virtual FText GetNodeTitle(ENodeTitleType::Type TitleType) const override;
 	virtual FSlateIcon GetIconAndTint(FLinearColor& OutColor) const override;
+#endif
 
 	// Override from UK2Node
 	virtual void GetNodeContextMenuActions(class UToolMenu* Menu, class UGraphNodeContextMenuContext* Context) const override;

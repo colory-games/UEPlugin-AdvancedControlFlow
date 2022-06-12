@@ -21,7 +21,6 @@ public class MultipleCaseBranch : ModuleRules
 			"Slate",
 			"SlateCore",
 			"ToolMenus",
-			"UnrealEd",
 		});
 	}
 }
