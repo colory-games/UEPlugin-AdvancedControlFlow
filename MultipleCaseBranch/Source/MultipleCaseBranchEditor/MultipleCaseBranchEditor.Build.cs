@@ -10,9 +10,18 @@ public class MultipleCaseBranchEditor : ModuleRules
 
 		PublicDependencyModuleNames.AddRange(new string[]{
 			"MultipleCaseBranch",
+			"Core",
+			"CoreUObject",
+			"Engine",
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[]{
+			"BlueprintGraph",
+			"GraphEditor",
+			"KismetCompiler",
+			"Slate",
+			"SlateCore",
+			"ToolMenus",
 			"UnrealEd",
 		});
 	}
