@@ -16,12 +16,7 @@
   "Modules": [
     {
       "Name": "MultipleCaseBranch",
-      "Type": "Runtime",
-      "LoadingPhase": "PreDefault"
-    },
-    {
-      "Name": "MultipleCaseBranchEditor",
-      "Type": "Editor",
+      "Type": "UncookedOnly",
       "LoadingPhase": "PreLoadingScreen"
     }
   ]
