@@ -9,7 +9,7 @@
 // { Case Conditional Pin : Case Execution Pin }
 typedef TPair<UEdGraphPin*, UEdGraphPin*> CasePinPair;
 
-UCLASS(MinimalAPI, meta = (Keywords = "elseif"))
+UCLASS(MinimalAPI, meta = (Keywords = "If ElseIf Else Branch"))
 class UK2Node_MultipleCaseBranch : public UK2Node, public IK2Node_AddPinInterface
 {
 	GENERATED_BODY()

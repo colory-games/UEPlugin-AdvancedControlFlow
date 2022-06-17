@@ -19,5 +19,10 @@
       "Type": "Runtime",
       "LoadingPhase": "PreDefault"
     },
+    {
+      "Name": "MultipleCaseBranchEditor",
+      "Type": "Editor",
+      "LoadingPhase": "PreLoadingScreen"
+    }
   ]
 }
