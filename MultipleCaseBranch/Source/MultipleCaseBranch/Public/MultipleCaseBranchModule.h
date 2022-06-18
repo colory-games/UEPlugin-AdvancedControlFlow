@@ -2,9 +2,9 @@
 
 #include "Modules/ModuleManager.h"
 
-#define LOCTEXT_NAMESPACE "FSamplePluginModule"
+#define LOCTEXT_NAMESPACE "FMultipleCaseBranchModule"
 
-class FSamplePluginModule : public IModuleInterface
+class FMultipleCaseBranchModule : public IModuleInterface
 {
 public:
 	virtual void StartupModule() override;
