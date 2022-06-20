@@ -4,9 +4,9 @@
 
 #include "GraphEditorSettings.h"
 #include "K2Node_MultipleCaseBranch.h"
-#include "NodeFactory.h"
 #include "Kismet2/BlueprintEditorUtils.h"
 #include "KismetPins/SGraphPinExec.h"
+#include "NodeFactory.h"
 
 class SGraphPinMultipleCaseBranchDefaultCaseExec : public SGraphPinExec
 {
