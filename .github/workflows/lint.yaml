@@ -9,8 +9,8 @@ on:
   pull_request:
 
 jobs:
-  clang-format:
-    name: clang-format
+  plugin-clang-format:
+    name: plugin-clang-format
     runs-on: ubuntu-latest
     container:
       image: ubuntu:20.04
@@ -25,5 +25,22 @@ jobs:
 
       - name: clang-format
         run: |
-          mkdir -p failure_state_clang-format
-          bash tests/lint/clang-format/run.sh AdvancedControlFlow
+          bash tests/lint/clang-format/run.sh MultipleCaseBranch
+
+  sample-clang-format:
+    name: sample-clang-format
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:20.04
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install clang-format
+        run: |
+          apt update
+          apt install -y clang-format
+
+      - name: clang-format
+        run: |
+          bash tests/lint/clang-format/run.sh samples/SampleProject

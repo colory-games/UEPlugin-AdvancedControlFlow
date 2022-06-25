@@ -5,6 +5,9 @@ workflows:
       - build-plugin:
           context:
             - unreal-engine-ci
+      - build-sample:
+          context:
+            - unreal-engine-ci
 
 version: 2
 jobs:
@@ -23,3 +26,31 @@ jobs:
               -Plugin=${PWD}/AdvancedControlFlow/AdvancedControlFlow.uplugin \
               -Package=/tmp \
               -Rocket
+
+  build-sample:
+    docker:
+      - image: ghcr.io/epicgames/unreal-engine:dev-slim-5.0
+        auth:
+          username: $GHCR_USERNAME
+          password: $GHCR_PASSWORD
+    steps:
+      - checkout
+      - run:
+          name: "Build Sample"
+          command: |
+            /home/ue4/UnrealEngine/Engine/Build/BatchFiles/RunUAT.sh BuildCookRun \
+              -utf8output \
+              -platform=Linux \
+              -clientconfig=Shipping \
+              -serverconfig=Shipping \
+              -project=${PWD}/samples/SampleProject/SampleProject.uproject \
+              -noP4 \
+              -nodebuginfo \
+              -allmaps \
+              -cook \
+              -build \
+              -stage \
+              -prereqs \
+              -pak \
+              -archive \
+              -archivedirectory=/tmp/Packaged
