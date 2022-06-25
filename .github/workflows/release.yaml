@@ -9,8 +9,8 @@ on:
   pull_request:
 
 jobs:
-  upload-artifact:
-    name: Upload artifact
+  pack:
+    name: Pack plugin sources
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout repo
