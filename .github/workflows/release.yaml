@@ -30,7 +30,7 @@ jobs:
 
   publish:
     name: Publish plugin
-    needs: upload-artifact
+    needs: pack
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-18.04
     steps:
