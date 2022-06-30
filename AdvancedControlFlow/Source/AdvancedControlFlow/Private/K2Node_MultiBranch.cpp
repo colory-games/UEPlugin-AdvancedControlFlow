@@ -25,7 +25,7 @@
 
 #define LOCTEXT_NAMESPACE "K2Node"
 
-namespace
+namespace MultipleCaseBranch
 {
 static const FName DefaultExecPinName(TEXT("DefaultExec"));
 static const FName CaseExecPinNamePrefix(TEXT("CaseExec"));
@@ -33,7 +33,9 @@ static const FName CaseCondPinNamePrefix(TEXT("CaseCond"));
 static const FName DefaultExecPinFriendlyName(TEXT("Default"));
 static const FName CaseExecPinFriendlyNamePrefix(TEXT("Case"));
 static const FName CaseCondPinFriendlyNamePrefix(TEXT("Case"));
-}	 // namespace
+}	 // namespace MultipleCaseBranch
+
+using namespace MultipleCaseBranch;
 
 class FKCHandler_MultiBranch : public FNodeHandlingFunctor
 {

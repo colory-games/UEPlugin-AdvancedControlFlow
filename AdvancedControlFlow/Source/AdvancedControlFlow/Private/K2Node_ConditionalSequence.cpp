@@ -12,7 +12,7 @@
 
 #define LOCTEXT_NAMESPACE "K2Node"
 
-namespace
+namespace ConditionalSequence
 {
 static const FName DefaultExecPinName(TEXT("DefaultExec"));
 static const FName CaseExecPinNamePrefix(TEXT("CaseExec"));
@@ -20,7 +20,9 @@ static const FName CaseCondPinNamePrefix(TEXT("CaseCond"));
 static const FName DefaultExecPinFriendlyName(TEXT("Default"));
 static const FName CaseExecPinFriendlyNamePrefix(TEXT("Case"));
 static const FName CaseCondPinFriendlyNamePrefix(TEXT("Case"));
-}	 // namespace
+}	 // namespace ConditionalSequence
+
+using namespace ConditionalSequence;
 
 UK2Node_ConditionalSequence::UK2Node_ConditionalSequence(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
