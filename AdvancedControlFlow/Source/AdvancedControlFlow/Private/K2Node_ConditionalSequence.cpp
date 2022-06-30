@@ -165,30 +165,27 @@ void UK2Node_ConditionalSequence::ExpandNode(FKismetCompilerContext& CompilerCon
 	UEdGraphPin* DefaultExecPin = FindPin(DefaultExecPinName);
 
 	{
-		UK2Node_ExecutionSequence* SequenceFunction = CompilerContext.SpawnIntermediateNode<UK2Node_ExecutionSequence>(this, SourceGraph);
-		SequenceFunction->AllocateDefaultPins();
+		UK2Node_ExecutionSequence* Sequence = CompilerContext.SpawnIntermediateNode<UK2Node_ExecutionSequence>(this, SourceGraph);
+		Sequence->AllocateDefaultPins();
 
-		CompilerContext.MovePinLinksToIntermediate(*ExecTriggeringPin, *SequenceFunction->GetExecPin());
-		CompilerContext.MovePinLinksToIntermediate(*DefaultExecPin, *SequenceFunction->GetThenPinGivenIndex(0));
+		CompilerContext.MovePinLinksToIntermediate(*ExecTriggeringPin, *Sequence->GetExecPin());
+		CompilerContext.MovePinLinksToIntermediate(*DefaultExecPin, *Sequence->GetThenPinGivenIndex(0));
 
 		for (int32 Index = 0; Index < CasePairs.Num(); ++Index)
 		{
-			UEdGraphPin* CaseCondPin = CasePairs[Index].Key;
-			UEdGraphPin* CaseExecPin = CasePairs[Index].Value;
-
-			SequenceFunction->AddInputPin();
-			UEdGraphPin* SequenceExecPin = SequenceFunction->GetThenPinGivenIndex(Index + 1);
-
 			UK2Node_IfThenElse* IfThenElse = CompilerContext.SpawnIntermediateNode<UK2Node_IfThenElse>(this, SourceGraph);
 			IfThenElse->AllocateDefaultPins();
 
+			Sequence->AddInputPin();
+
+			UEdGraphPin* CaseCondPin = CasePairs[Index].Key;
+			UEdGraphPin* CaseExecPin = CasePairs[Index].Value;
+			UEdGraphPin* SequenceExecPin = Sequence->GetThenPinGivenIndex(Index + 1);
 			UEdGraphPin* IfThenElseExecPin = IfThenElse->GetExecPin();
 			UEdGraphPin* IfThenElseThenPin = IfThenElse->GetThenPin();
-			UEdGraphPin* IfThenElseElsePin = IfThenElse->GetElsePin();
 			UEdGraphPin* IfThenElseCondPin = IfThenElse->GetConditionPin();
 
 			SequenceExecPin->MakeLinkTo(IfThenElseExecPin);
-
 			CompilerContext.MovePinLinksToIntermediate(*CaseExecPin, *IfThenElseThenPin);
 			CompilerContext.MovePinLinksToIntermediate(*CaseCondPin, *IfThenElseCondPin);
 		}
