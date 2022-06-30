@@ -3,19 +3,12 @@
 #include "K2Node_ConditionalSequence.h"
 
 #include "BlueprintNodeSpawner.h"
-#include "EdGraphUtilities.h"
 #include "EditorCategoryUtils.h"
-#include "GraphEditorSettings.h"
-#include "Kismet/KismetMathLibrary.h"
 #include "Kismet2/BlueprintEditorUtils.h"
-#include "KismetCompiledFunctionContext.h"
 #include "KismetCompiler.h"
-#include "KismetCompilerMisc.h"
-#include "ToolMenu.h"
-
 #include "K2Node_ExecutionSequence.h"
 #include "K2Node_IfThenElse.h"
-#include "K2Node_Knot.h"
+#include "ToolMenu.h"
 
 #define LOCTEXT_NAMESPACE "K2Node"
 
@@ -27,7 +20,6 @@ static const FName CaseCondPinNamePrefix(TEXT("CaseCond"));
 static const FName DefaultExecPinFriendlyName(TEXT("Default"));
 static const FName CaseExecPinFriendlyNamePrefix(TEXT("Case"));
 static const FName CaseCondPinFriendlyNamePrefix(TEXT("Case"));
-static const FName NopExecPinName(TEXT("NopExec"));
 }	 // namespace
 
 UK2Node_ConditionalSequence::UK2Node_ConditionalSequence(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
