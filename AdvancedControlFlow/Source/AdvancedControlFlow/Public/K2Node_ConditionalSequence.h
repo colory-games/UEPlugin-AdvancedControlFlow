@@ -9,7 +9,6 @@
 // { Case Conditional Pin : Case Execution Pin }
 typedef TPair<UEdGraphPin*, UEdGraphPin*> CasePinPair;
 
-
 UCLASS(MinimalAPI, meta = (Keywords = "Sequence Conditional"))
 class UK2Node_ConditionalSequence : public UK2Node, public IK2Node_AddPinInterface
 {

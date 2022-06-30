@@ -4,10 +4,10 @@
 
 #include "BlueprintNodeSpawner.h"
 #include "EditorCategoryUtils.h"
-#include "Kismet2/BlueprintEditorUtils.h"
-#include "KismetCompiler.h"
 #include "K2Node_ExecutionSequence.h"
 #include "K2Node_IfThenElse.h"
+#include "Kismet2/BlueprintEditorUtils.h"
+#include "KismetCompiler.h"
 #include "ToolMenu.h"
 
 #define LOCTEXT_NAMESPACE "K2Node"
@@ -47,7 +47,8 @@ void UK2Node_ConditionalSequence::AllocateDefaultPins()
 
 FText UK2Node_ConditionalSequence::GetTooltipText() const
 {
-	return LOCTEXT("ConditionalSequence_Tooltip", "Conditional Sequence\nExecutes a series of pins in order which meets the condition");
+	return LOCTEXT(
+		"ConditionalSequence_Tooltip", "Conditional Sequence\nExecutes a series of pins in order which meets the condition");
 }
 
 FLinearColor UK2Node_ConditionalSequence::GetNodeTitleColor() const
@@ -68,14 +69,15 @@ FSlateIcon UK2Node_ConditionalSequence::GetIconAndTint(FLinearColor& OutColor) c
 
 #endif
 
-void UK2Node_ConditionalSequence::GetNodeContextMenuActions(class UToolMenu* Menu, class UGraphNodeContextMenuContext* Context) const
+void UK2Node_ConditionalSequence::GetNodeContextMenuActions(
+	class UToolMenu* Menu, class UGraphNodeContextMenuContext* Context) const
 {
 	Super::GetNodeContextMenuActions(Menu, Context);
 
 	if (!Context->bIsDebugging)
 	{
-		FToolMenuSection& Section =
-			Menu->AddSection("K2NodeConditionalSequence", NSLOCTEXT("K2Nodes", "ConditionalSequenceHeader", "Conditional Sequence"));
+		FToolMenuSection& Section = Menu->AddSection(
+			"K2NodeConditionalSequence", NSLOCTEXT("K2Nodes", "ConditionalSequenceHeader", "Conditional Sequence"));
 
 		if (Context->Node->Pins.Num() >= 1)
 		{
