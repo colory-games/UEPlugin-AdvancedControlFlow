@@ -16,6 +16,7 @@ public class MultipleCaseBranch : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[]{
 			"BlueprintGraph",
+			"EditorStyle",
 			"GraphEditor",
 			"KismetCompiler",
 			"Slate",

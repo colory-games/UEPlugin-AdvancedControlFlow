@@ -172,7 +172,7 @@ FText UK2Node_MultipleCaseBranch::GetNodeTitle(ENodeTitleType::Type TitleType) c
 
 FSlateIcon UK2Node_MultipleCaseBranch::GetIconAndTint(FLinearColor& OutColor) const
 {
-	static FSlateIcon Icon("EditorStyle", "GraphEditor.Branch_16x");
+	static FSlateIcon Icon("EditorStyle", "GraphEditor.Switch_16x");
 	return Icon;
 }
 

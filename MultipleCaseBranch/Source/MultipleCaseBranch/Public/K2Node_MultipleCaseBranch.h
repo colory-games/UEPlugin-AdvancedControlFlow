@@ -41,7 +41,6 @@ class UK2Node_MultipleCaseBranch : public UK2Node, public IK2Node_AddPinInterfac
 	}
 
 	// Override from IK2Node_AddPinInterface
-	virtual void AddInputPin() override;
 	virtual void RemoveInputPin(UEdGraphPin* Pin) override;
 
 	void AddCasePinAfter(UEdGraphPin* Pin);
@@ -81,4 +80,6 @@ public:
 	UEdGraphPin* GetFunctionPin() const;
 	UEdGraphPin* GetCondPinFromExecPin(const UEdGraphPin* ExecPin) const;
 	UEdGraphPin* GetExecPinFromCondPin(const UEdGraphPin* CondPin) const;
+
+	virtual void AddInputPin() override;
 };
