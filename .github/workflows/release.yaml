@@ -1,0 +1,59 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  pull_request:
+
+jobs:
+  pack:
+    name: Pack plugin sources
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Compress add-on
+        run: |
+          mkdir release
+          zip -r MultipleCaseBranch.zip MultipleCaseBranch
+          mv MultipleCaseBranch.zip release
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: MultipleCaseBranch
+          path: "release"
+
+  publish:
+    name: Publish plugin
+    needs: pack
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Fetch Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: dist
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_ACTIONS }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: true
+          prerelease: false
+      - name: Publish Add-on to GitHub Release Page
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_ACTIONS }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: dist/MultipleCaseBranch/MultipleCaseBranch.zip
+          asset_name: MultipleCaseBranch.zip
+          asset_content_type: application/zip
