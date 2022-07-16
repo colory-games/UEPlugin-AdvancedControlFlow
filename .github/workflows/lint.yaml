@@ -26,4 +26,4 @@ jobs:
       - name: clang-format
         run: |
           mkdir -p failure_state_clang-format
-          bash tests/lint/clang-format/run.sh MultipleCaseBranch
+          bash tests/lint/clang-format/run.sh AdvancedControlFlow

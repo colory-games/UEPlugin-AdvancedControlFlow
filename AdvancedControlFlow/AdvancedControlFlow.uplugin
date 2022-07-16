@@ -2,11 +2,11 @@
   "FileVersion": 3,
   "Version": 1,
   "VersionName": "0.1",
-  "FriendlyName": "Multiple Case Branch",
-  "Description": "Blueprint Node: Multiple Case Branch",
+  "FriendlyName": "Advanced Control Flow",
+  "Description": "Blueprint Node: Advanced Control Flow",
   "Category": "Other",
   "CreatedBy": "nutti (Colory Games)",
-  "CreatedByURL": "https://github.com/colory-games/UEPlugin-MultipleCaseBranch",
+  "CreatedByURL": "https://github.com/colory-games/UEPlugin-AdvancedControlFlow",
   "DocsURL": "",
   "MarketplaceURL": "",
   "SupportURL": "",
@@ -15,7 +15,7 @@
   "Installed": false,
   "Modules": [
     {
-      "Name": "MultipleCaseBranch",
+      "Name": "AdvancedControlFlow",
       "Type": "UncookedOnly",
       "LoadingPhase": "PreLoadingScreen"
     }

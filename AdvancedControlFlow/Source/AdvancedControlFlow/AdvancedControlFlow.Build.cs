@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class MultipleCaseBranch : ModuleRules
+public class AdvancedControlFlow : ModuleRules
 {
-	public MultipleCaseBranch(ReadOnlyTargetRules Target) : base(Target)
+	public AdvancedControlFlow(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
