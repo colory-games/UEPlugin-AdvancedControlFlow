@@ -44,14 +44,14 @@ void UK2Node_CondExecPairedNode::AllocateDefaultPins()
 	Super::AllocateDefaultPins();
 }
 
-void UK2Node_CondExecPairedNode::GetNodeContextMenuActions(
-	class UToolMenu* Menu, class UGraphNodeContextMenuContext* Context) const
+void UK2Node_CondExecPairedNode::GetNodeContextMenuActions(class UToolMenu* Menu, class UGraphNodeContextMenuContext* Context) const
 {
 	Super::GetNodeContextMenuActions(Menu, Context);
 
 	if (!Context->bIsDebugging)
 	{
-		FToolMenuSection& Section = Menu->AddSection(FName(NodeContextMenuSectionName), FText::AsCultureInvariant(NodeContextMenuSectionLabel));
+		FToolMenuSection& Section =
+			Menu->AddSection(FName(NodeContextMenuSectionName), FText::AsCultureInvariant(NodeContextMenuSectionLabel));
 
 		if (Context->Node->Pins.Num() >= 1)
 		{

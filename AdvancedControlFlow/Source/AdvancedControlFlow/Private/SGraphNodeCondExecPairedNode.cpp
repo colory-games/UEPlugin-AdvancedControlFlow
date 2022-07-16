@@ -75,7 +75,8 @@ void SGraphNodeCondExecPairedNode::CreatePinWidgets()
 void SGraphNodeCondExecPairedNode::CreateOutputSideAddButton(TSharedPtr<SVerticalBox> OutputBox)
 {
 	// TODO: Use NSLOCTEXT macro
-	TSharedRef<SWidget> AddPinButton = AddPinButtonContent(FText::AsCultureInvariant("Add pin"), FText::AsCultureInvariant("Add new pin"));
+	TSharedRef<SWidget> AddPinButton =
+		AddPinButtonContent(FText::AsCultureInvariant("Add pin"), FText::AsCultureInvariant("Add new pin"));
 
 	FMargin AddPinPadding = Settings->GetOutputPinPadding();
 	AddPinPadding.Top += 6.0f;

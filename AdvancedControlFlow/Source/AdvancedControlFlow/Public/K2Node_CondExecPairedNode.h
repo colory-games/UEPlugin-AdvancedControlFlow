@@ -30,13 +30,11 @@ class UK2Node_CondExecPairedNode : public UK2Node, public IK2Node_AddPinInterfac
 	GENERATED_BODY()
 
 public:
-
 	// Override from IK2Node_AddPinInterface
 	virtual void AddInputPin() override;
 	virtual void RemoveInputPin(UEdGraphPin* Pin) override;
 
 protected:
-
 	// Override from UK2Node
 	virtual void GetNodeContextMenuActions(class UToolMenu* Menu, class UGraphNodeContextMenuContext* Context) const override;
 	virtual void ReallocatePinsDuringReconstruction(TArray<UEdGraphPin*>& OldPins) override;
