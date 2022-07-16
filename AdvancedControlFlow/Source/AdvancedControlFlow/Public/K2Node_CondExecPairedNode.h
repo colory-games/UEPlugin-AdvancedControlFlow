@@ -48,16 +48,19 @@ class UK2Node_CondExecPairedNode : public UK2Node, public IK2Node_AddPinInterfac
 		return true;
 	}
 
+public:
+
 	// Override from IK2Node_AddPinInterface
 	virtual void AddInputPin() override;
+
+protected:
+
 	virtual void RemoveInputPin(UEdGraphPin* Pin) override;
 
 	void AddCasePinAfter(UEdGraphPin* Pin);
 	void AddCasePinBefore(UEdGraphPin* Pin);
 	void RemoveFirstCasePin();
 	void RemoveLastCasePin();
-
-protected:
 
 	// Internal functions.
 	UEdGraphPin* GetCaseCondPinFromCaseIndex(int32 CaseIndex) const;
