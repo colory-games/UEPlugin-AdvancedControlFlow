@@ -65,8 +65,7 @@ void SGraphNodeMultiBranch::CreatePinWidgets()
 
 void SGraphNodeMultiBranch::CreateOutputSideAddButton(TSharedPtr<SVerticalBox> OutputBox)
 {
-	TSharedRef<SWidget> AddPinButton =
-		AddPinButtonContent(NSLOCTEXT("MultiBranchNode", "MultiBranchNodeAddPinButton", "Add pin"),
+	TSharedRef<SWidget> AddPinButton = AddPinButtonContent(NSLOCTEXT("MultiBranchNode", "MultiBranchNodeAddPinButton", "Add pin"),
 			NSLOCTEXT("MultiBranchNode", "MultiBranchNodeAddPinButton_Tooltip", "Add new pin"));
 
 	FMargin AddPinPadding = Settings->GetOutputPinPadding();
