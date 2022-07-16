@@ -1,6 +1,6 @@
 # Original: https://github.com/github/gitignore/blob/main/UnrealEngine.gitignore
 
-Plugins/MultipleCaseBranch
+Plugins/AdvancedControlFlow
 
 # Visual Studio 2015 user specific files
 .vs/
