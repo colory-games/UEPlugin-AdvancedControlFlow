@@ -51,8 +51,7 @@ void UK2Node_CondExecPairedNode::GetNodeContextMenuActions(
 
 	if (!Context->bIsDebugging)
 	{
-		FToolMenuSection& Section = Menu->AddSection(
-			"K2NodeConditionalSequence", NSLOCTEXT("K2Nodes", "ConditionalSequenceHeader", "Conditional Sequence"));
+		FToolMenuSection& Section = Menu->AddSection(FName(NodeContextMenuSectionName), FText::AsCultureInvariant(NodeContextMenuSectionLabel));
 
 		if (Context->Node->Pins.Num() >= 1)
 		{
@@ -374,7 +373,7 @@ void UK2Node_CondExecPairedNode::RemoveCasePinAt(int32 CaseIndex)
 int32 UK2Node_CondExecPairedNode::GetCasePinCount() const
 {
 	// TODO: need to optimize.
-	for (int32 Index = Pins.Num() / 2; Index >= 0; --Index)
+	for (int32 Index = Pins.Num(); Index >= 0; --Index)
 	{
 		UEdGraphPin* CaseCondPinIndex = GetCaseCondPinFromCaseIndex(Index);
 		UEdGraphPin* CaseExecPinIndex = GetCaseExecPinFromCaseIndex(Index);
@@ -404,10 +403,6 @@ TArray<CasePinPair> UK2Node_CondExecPairedNode::GetCasePinPairs() const
 	}
 
 	return CasePairs;
-}
-
-void UK2Node_CondExecPairedNode::AddCasePinAt(int32 Index)
-{
 }
 
 bool UK2Node_CondExecPairedNode::IsCasePin(UEdGraphPin* Pin) const

@@ -21,6 +21,8 @@
 
 UK2Node_ConditionalSequence::UK2Node_ConditionalSequence(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
+	NodeContextMenuSectionName = "K2NodeConditionalSequence";
+	NodeContextMenuSectionLabel = "Conditional Sequence";
 }
 
 FText UK2Node_ConditionalSequence::GetTooltipText() const

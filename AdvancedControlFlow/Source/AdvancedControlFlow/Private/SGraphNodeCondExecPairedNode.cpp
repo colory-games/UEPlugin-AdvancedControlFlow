@@ -9,18 +9,18 @@
 
 #pragma once
 
-#include "SGraphNodeMultiBranch.h"
+#include "SGraphNodeCondExecPairedNode.h"
 
 #include "GraphEditorSettings.h"
-#include "K2Node_MultiBranch.h"
+#include "K2Node_CondExecPairedNode.h"
 #include "Kismet2/BlueprintEditorUtils.h"
 #include "KismetPins/SGraphPinExec.h"
 #include "NodeFactory.h"
 
-class SGraphPinMultiBranchDefaultCaseExec : public SGraphPinExec
+class SGraphPinCondExecPairedNodeDefaultCaseExec : public SGraphPinExec
 {
 public:
-	SLATE_BEGIN_ARGS(SGraphPinMultiBranchDefaultCaseExec)
+	SLATE_BEGIN_ARGS(SGraphPinCondExecPairedNodeDefaultCaseExec)
 	{
 	}
 	SLATE_END_ARGS()
@@ -33,17 +33,17 @@ public:
 	}
 };
 
-void SGraphNodeMultiBranch::Construct(const FArguments& InArgs, UK2Node_MultiBranch* InNode)
+void SGraphNodeCondExecPairedNode::Construct(const FArguments& InArgs, UK2Node_CondExecPairedNode* InNode)
 {
 	this->GraphNode = InNode;
 	this->SetCursor(EMouseCursor::CardinalCross);
 	this->UpdateGraphNode();
 }
 
-void SGraphNodeMultiBranch::CreatePinWidgets()
+void SGraphNodeCondExecPairedNode::CreatePinWidgets()
 {
-	UK2Node_MultiBranch* MultiBranch = CastChecked<UK2Node_MultiBranch>(GraphNode);
-	UEdGraphPin* DefaultPin = MultiBranch->GetDefaultExecPin();
+	UK2Node_CondExecPairedNode* CondExecPairedNode = CastChecked<UK2Node_CondExecPairedNode>(GraphNode);
+	UEdGraphPin* DefaultPin = CondExecPairedNode->GetDefaultExecPin();
 
 	RightNodeBox->AddSlot().AutoHeight()[SNew(STextBlock).LineHeightPercentage(2.0f)];
 
@@ -67,15 +67,15 @@ void SGraphNodeMultiBranch::CreatePinWidgets()
 			.VAlign(VAlign_Center)
 			.Padding(1.0f)[SNew(SImage).Image(FEditorStyle::GetBrush("Graph.Pin.DefaultPinSeparator"))];
 
-		TSharedPtr<SGraphPin> NewPin = SNew(SGraphPinMultiBranchDefaultCaseExec, DefaultPin);
+		TSharedPtr<SGraphPin> NewPin = SNew(SGraphPinCondExecPairedNodeDefaultCaseExec, DefaultPin);
 		this->AddPin(NewPin.ToSharedRef());
 	}
 }
 
-void SGraphNodeMultiBranch::CreateOutputSideAddButton(TSharedPtr<SVerticalBox> OutputBox)
+void SGraphNodeCondExecPairedNode::CreateOutputSideAddButton(TSharedPtr<SVerticalBox> OutputBox)
 {
-	TSharedRef<SWidget> AddPinButton = AddPinButtonContent(NSLOCTEXT("MultiBranchNode", "MultiBranchNodeAddPinButton", "Add pin"),
-		NSLOCTEXT("MultiBranchNode", "MultiBranchNodeAddPinButton_Tooltip", "Add new pin"));
+	// TODO: Use NSLOCTEXT macro
+	TSharedRef<SWidget> AddPinButton = AddPinButtonContent(FText::AsCultureInvariant("Add pin"), FText::AsCultureInvariant("Add new pin"));
 
 	FMargin AddPinPadding = Settings->GetOutputPinPadding();
 	AddPinPadding.Top += 6.0f;
@@ -83,20 +83,21 @@ void SGraphNodeMultiBranch::CreateOutputSideAddButton(TSharedPtr<SVerticalBox> O
 	OutputBox->AddSlot().AutoHeight().VAlign(VAlign_Center).Padding(AddPinPadding)[AddPinButton];
 }
 
-EVisibility SGraphNodeMultiBranch::IsAddPinButtonVisible() const
+EVisibility SGraphNodeCondExecPairedNode::IsAddPinButtonVisible() const
 {
 	return SGraphNode::IsAddPinButtonVisible();
 }
 
-FReply SGraphNodeMultiBranch::OnAddPin()
+FReply SGraphNodeCondExecPairedNode::OnAddPin()
 {
-	UK2Node_MultiBranch* MultiBranch = CastChecked<UK2Node_MultiBranch>(GraphNode);
+	UK2Node_CondExecPairedNode* CondExecPairedNode = CastChecked<UK2Node_CondExecPairedNode>(GraphNode);
 
-	const FScopedTransaction Transaction(NSLOCTEXT("Kismet", "AddExecutionPin", "Add Execution Pin"));
-	MultiBranch->Modify();
+	// TODO: Use NSLOCTEXT macro
+	const FScopedTransaction Transaction(FText::AsCultureInvariant("Add Execution Pin"));
+	CondExecPairedNode->Modify();
 
-	MultiBranch->AddInputPin();
-	FBlueprintEditorUtils::MarkBlueprintAsModified(MultiBranch->GetBlueprint());
+	CondExecPairedNode->AddInputPin();
+	FBlueprintEditorUtils::MarkBlueprintAsModified(CondExecPairedNode->GetBlueprint());
 
 	UpdateGraphNode();
 	GraphNode->GetGraph()->NotifyGraphChanged();

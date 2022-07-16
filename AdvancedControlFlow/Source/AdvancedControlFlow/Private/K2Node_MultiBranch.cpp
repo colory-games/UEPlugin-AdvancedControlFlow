@@ -128,6 +128,8 @@ UK2Node_MultiBranch::UK2Node_MultiBranch(const FObjectInitializer& ObjectInitial
 {
 	ConditionPreProcessFuncClass = UKismetMathLibrary::StaticClass();
 	ConditionPreProcessFuncName = TEXT("Not_PreBool");
+	NodeContextMenuSectionName = "K2NodeMultiBranch";
+	NodeContextMenuSectionLabel = "Multi Branch";
 }
 
 void UK2Node_MultiBranch::AllocateDefaultPins()
@@ -135,17 +137,15 @@ void UK2Node_MultiBranch::AllocateDefaultPins()
 	// Pin structure
 	//   N: Number of case pin pair
 	// -----
-	// 0: Execution Triggering (In, Exec)
-	// 1: Default Execution (Out, Exec)
-	// 2: Internal function (Hidden, Object)
+	// 0: Internal function (Hidden, Object)
+	// 1: Execution Triggering (In, Exec)
+	// 2: Default Execution (Out, Exec)
 	// 3 - 2+N: Case Conditional (In, Boolean)
 	// 2+N+1 - 2*(N+1): Case Execution (Out, Exec)
 
-	CreateExecTriggeringPin();
-
-	CreateDefaultExecPin();
-
 	CreateFunctionPin();
+
+	Super::AllocateDefaultPins();
 }
 
 FText UK2Node_MultiBranch::GetTooltipText() const
@@ -171,25 +171,9 @@ FSlateIcon UK2Node_MultiBranch::GetIconAndTint(FLinearColor& OutColor) const
 
 void UK2Node_MultiBranch::ReallocatePinsDuringReconstruction(TArray<UEdGraphPin*>& OldPins)
 {
-	CreateExecTriggeringPin();
-
-	CreateDefaultExecPin();
-
 	CreateFunctionPin();
 
-	int32 CasePinCount = 0;
-	for (auto& Pin : OldPins)
-	{
-		if (UEdGraphSchema_K2::IsExecPin(*Pin) && (Pin->Direction == EGPD_Output) && IsCasePin(Pin))
-		{
-			++CasePinCount;
-		}
-	}
-
-	for (int32 Index = 0; Index < CasePinCount; ++Index)
-	{
-		AddCasePinPair(Index);
-	}
+	Super::ReallocatePinsDuringReconstruction(OldPins);
 }
 
 class FNodeHandlingFunctor* UK2Node_MultiBranch::CreateNodeHandler(class FKismetCompilerContext& CompilerContext) const
