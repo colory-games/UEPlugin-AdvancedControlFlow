@@ -4,13 +4,13 @@
 #include "K2Node.h"
 #include "K2Node_AddPinInterface.h"
 
-#include "K2Node_MultipleCaseBranch.generated.h"
+#include "K2Node_MultiBranch.generated.h"
 
 // { Case Conditional Pin : Case Execution Pin }
 typedef TPair<UEdGraphPin*, UEdGraphPin*> CasePinPair;
 
 UCLASS(MinimalAPI, meta = (Keywords = "If ElseIf Else Branch"))
-class UK2Node_MultipleCaseBranch : public UK2Node, public IK2Node_AddPinInterface
+class UK2Node_MultiBranch : public UK2Node, public IK2Node_AddPinInterface
 {
 	GENERATED_BODY()
 
@@ -74,7 +74,7 @@ protected:
 	virtual void CreateFunctionPin();
 
 public:
-	UK2Node_MultipleCaseBranch(const FObjectInitializer& ObjectInitializer);
+	UK2Node_MultiBranch(const FObjectInitializer& ObjectInitializer);
 
 	UEdGraphPin* GetDefaultExecPin() const;
 	UEdGraphPin* GetFunctionPin() const;

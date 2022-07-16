@@ -19,13 +19,13 @@ jobs:
       - name: Compress add-on
         run: |
           mkdir release
-          zip -r MultipleCaseBranch.zip MultipleCaseBranch
-          mv MultipleCaseBranch.zip release
+          zip -r AdvancedControlFlow.zip AdvancedControlFlow
+          mv AdvancedControlFlow.zip release
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: MultipleCaseBranch
+          name: AdvancedControlFlow
           path: "release"
 
   publish:
@@ -54,6 +54,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_ACTIONS }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/MultipleCaseBranch/MultipleCaseBranch.zip
-          asset_name: MultipleCaseBranch.zip
+          asset_path: dist/AdvancedControlFlow/AdvancedControlFlow.zip
+          asset_name: AdvancedControlFlow.zip
           asset_content_type: application/zip
