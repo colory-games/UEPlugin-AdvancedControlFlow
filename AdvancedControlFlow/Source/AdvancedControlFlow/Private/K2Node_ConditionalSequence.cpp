@@ -1,4 +1,13 @@
-﻿#pragma once
+﻿/*!
+ * AdvancedControlFlow
+ *
+ * Copyright (c) 2022 Colory Games
+ *
+ * This software is released under the MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
+#pragma once
 
 #include "K2Node_ConditionalSequence.h"
 
@@ -27,8 +36,6 @@ using namespace ConditionalSequence;
 UK2Node_ConditionalSequence::UK2Node_ConditionalSequence(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 }
-
-#if WITH_EDITOR
 
 void UK2Node_ConditionalSequence::AllocateDefaultPins()
 {
@@ -68,8 +75,6 @@ FSlateIcon UK2Node_ConditionalSequence::GetIconAndTint(FLinearColor& OutColor) c
 	static FSlateIcon Icon("EditorStyle", "GraphEditor.Sequence_16x");
 	return Icon;
 }
-
-#endif
 
 void UK2Node_ConditionalSequence::GetNodeContextMenuActions(
 	class UToolMenu* Menu, class UGraphNodeContextMenuContext* Context) const
