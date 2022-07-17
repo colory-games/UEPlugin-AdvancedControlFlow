@@ -1,9 +1,19 @@
 # Unreal Engine Plugin: Advanced Control Flow
 
-The Multi-Branches is a Unreal Engine plugin which adds a custom Blueprint node Multi-Branches to realize the multiple conditional branches (like if-elseif-else statement).  
-Stacking Branch nodes is a common implementation to realize the multiple conditional branches, but you can realize it with only one Multi-Branches node.
+Advanced Control Flow is a Unreal Engine plugin which adds custom Blueprint nodes to realize the complex control flow.
+
+The typical use case of this plugin is when you try to realize the if-else-else statement.  
+In this case, you need to stack the multiple branch nodes to check multiple conditions.  
+By using this plugin, you can realize this case with only one MultiBranch node.
 
 ![](docs/images/thumbnail/multiple_case_branch.png)
+
+## Features
+
+* MultiBranch
+  * Realize if-elseif-else statement (multiple conditional branches).
+* Conditional Sequence
+  * Execute all relevant execution pins if the conditional pin is true.
 
 ## Supported Environment
 
