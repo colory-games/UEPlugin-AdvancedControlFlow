@@ -9,11 +9,11 @@ Comparision to the implementation on the vanila Unreal Engine is as follows.
 
 ### Usage
 
-1. Search and place `MultiBranch` node on the Blueprint editor.
+1. Search and place MultiBranch node on the Blueprint editor.
 2. Click [Add Pin] to add a pin pair (condition and execution).
 3. Build a logic by connecting among the nodes.
 
-### Compared to C++ code
+### Comparison to C++ code
 
 @@@
 
@@ -31,7 +31,7 @@ if (Cond1) {
 
 ### Additional Info
 
-* Some useful features for adding/removing pins by right mouse click on the `MultiBranch` node.
+* Some useful menu for adding/removing pins by right mouse click on the MultiBranch node.
 
 ## Conditional Sequence
 
@@ -46,7 +46,7 @@ Comparision to the implementation on the vanila Unreal Engine is as follows.
 2. Click [Add Pin] to add a pin pair (condition and execution).
 3. Build a logic by connecting among the nodes.
 
-### Compared to C++ code
+### Comparison to C++ code
 
 @@@
 
@@ -61,3 +61,7 @@ if (Cond2) {
 }
 Default();
 ```
+
+### Additional Info
+
+* Some useful menu for adding/removing pins by right mouse click on the Conditional Sequence node.
