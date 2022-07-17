@@ -36,6 +36,11 @@ See [the tutorial document](docs/tutorial.md).
 
 See [CHANGELOG.md](CHANGELOG.md).
 
+# Bug Report / Feature Request / Disscussions
+
+If you want to report problems or request features, please [make issues](https://github.com/colory-games/UEPlugin-AdvancedControlFlow/issues).  
+You can also discuss about this plugin at [Discord](https://discord.gg/Tg9A5JxR).
+
 ## Project Author
 
 ### Owner
