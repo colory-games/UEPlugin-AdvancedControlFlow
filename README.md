@@ -31,3 +31,18 @@ See [the document](docs/installation.md) if you want to install a free version.
 ## Tutorial
 
 See [the tutorial document](docs/tutorial.md).
+
+## Change Log
+
+See [CHANGELOG.md](CHANGELOG.md)
+
+## Project Author
+
+### Owner
+
+This project is owned by the member of [Colory Games](https://colory-games.net/).  
+The main mainter of this project is as follows.
+
+|Name|Contact|
+|---|---|
+|[**@nutti**](https://github.com/nutti)|[Website (Japanese Only)](https://colorful-pico.net/), [Twitter](https://twitter.com/nutti__)|
