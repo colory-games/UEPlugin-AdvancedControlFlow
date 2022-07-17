@@ -20,8 +20,8 @@ const FName DefaultExecPinName(TEXT("DefaultExec"));
 const FName CaseExecPinNamePrefix(TEXT("CaseExec"));
 const FName CaseCondPinNamePrefix(TEXT("CaseCond"));
 const FName DefaultExecPinFriendlyName(TEXT("Default"));
-const FName CaseExecPinFriendlyNamePrefix(TEXT("Case"));
-const FName CaseCondPinFriendlyNamePrefix(TEXT("Case"));
+const FName CaseExecPinFriendlyNamePrefix(TEXT(" "));
+const FName CaseCondPinFriendlyNamePrefix(TEXT("Condition "));
 
 UK2Node_CondExecPairedNode::UK2Node_CondExecPairedNode(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -455,7 +455,7 @@ FString UK2Node_CondExecPairedNode::GetCasePinName(const FString& Prefix, int32 
 
 FString UK2Node_CondExecPairedNode::GetCasePinFriendlyName(const FString& Prefix, int32 CaseIndex) const
 {
-	return FString::Printf(TEXT("%s %d"), *Prefix, CaseIndex);
+	return FString::Printf(TEXT("%s%d"), *Prefix, CaseIndex);
 }
 
 UEdGraphPin* UK2Node_CondExecPairedNode::GetDefaultExecPin() const
