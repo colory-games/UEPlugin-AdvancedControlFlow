@@ -34,15 +34,15 @@ See [the tutorial document](docs/tutorial.md).
 
 ## Change Log
 
-See [CHANGELOG.md](CHANGELOG.md)
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## Project Author
 
 ### Owner
 
-This project is owned by the member of [Colory Games](https://colory-games.net/).  
+This project is owned by the members of [Colory Games](https://colory-games.net/).  
 The main mainter of this project is as follows.
 
 |Name|Contact|
 |---|---|
-|[**@nutti**](https://github.com/nutti)|[Website (Japanese Only)](https://colorful-pico.net/), [Twitter](https://twitter.com/nutti__)|
+|[**@nutti**](https://github.com/nutti)|[Website (Japanese Only)](https://colorful-pico.net/) \| [Twitter](https://twitter.com/nutti__)|
