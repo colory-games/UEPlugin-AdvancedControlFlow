@@ -25,7 +25,7 @@ jobs:
 
       - name: clang-format
         run: |
-          bash tests/lint/clang-format/run.sh MultipleCaseBranch
+          bash tests/lint/clang-format/run.sh AdvancedControlFlow
 
   sample-clang-format:
     name: sample-clang-format

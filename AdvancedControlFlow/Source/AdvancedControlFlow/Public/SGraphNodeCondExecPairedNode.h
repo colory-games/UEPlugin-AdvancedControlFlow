@@ -11,16 +11,16 @@
 
 #include "KismetNodes/SGraphNodeK2Base.h"
 
-class UK2Node_MultiBranch;
+class UK2Node_CondExecPairedNode;
 
-class SGraphNodeMultiBranch : public SGraphNodeK2Base
+class SGraphNodeCondExecPairedNode : public SGraphNodeK2Base
 {
-	SLATE_BEGIN_ARGS(SGraphNodeMultiBranch)
+	SLATE_BEGIN_ARGS(SGraphNodeCondExecPairedNode)
 	{
 	}
 	SLATE_END_ARGS()
 
-	void Construct(const FArguments& InArgs, UK2Node_MultiBranch* InNode);
+	void Construct(const FArguments& InArgs, UK2Node_CondExecPairedNode* InNode);
 
 	virtual void CreatePinWidgets() override;
 
