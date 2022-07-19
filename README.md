@@ -6,7 +6,7 @@ The typical use case of this plugin is when you try to realize the if-elseif-els
 To realize if-elseif-else statement on the vanilla Unreal Engine, you need to stack the multiple branch nodes to check multiple conditions.  
 By using this plugin, you can realize this case with only one MultiBranch node.
 
-![](docs/images/thumbnail/multiple_case_branch.png)
+![](docs/images/thumbnail/advanced_control_flow.png)
 
 ## Features
 
