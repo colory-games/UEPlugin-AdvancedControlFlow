@@ -5,7 +5,7 @@
 MultiBranch node realizes multiple conditional branches (like if-elseif-else statement).  
 Comparision to the implementation on the vanila Unreal Engine is as follows.
 
-@@@
+![Vanila vs MultiBranch](images/tutorial/vanila_vs_multibranch.png)
 
 ### Usage
 
@@ -15,17 +15,17 @@ Comparision to the implementation on the vanila Unreal Engine is as follows.
 
 ### Comparison to C++ code
 
-@@@
+![MultiBranch](images/tutorial/multibranch.png)
 
 Above Blueprint is same as below code in C++.
 
 ```cpp
-if (Cond1) {
-    Exec1();
-} else if (Cond2) {
-    Exec2();
+if (Condition_0) {
+    UKismetSystemLibrary::PrintString(GEngine->GetWorld(), "Condition 0");
+} else if (Condition_1) {
+    UKismetSystemLibrary::PrintString(GEngine->GetWorld(), "Condition 1");
 } else {
-    Default();
+    UKismetSystemLibrary::PrintString(GEngine->GetWorld(), "Default");
 }
 ```
 
@@ -38,7 +38,7 @@ if (Cond1) {
 MultiBranch node execute all relevant execution pins if the conditional pin is true.  
 Comparision to the implementation on the vanila Unreal Engine is as follows.
 
-@@@
+![Vanila vs Conditional Sequence](images/tutorial/vanila_vs_conditional-sequence.png)
 
 ### Usage
 
@@ -48,18 +48,18 @@ Comparision to the implementation on the vanila Unreal Engine is as follows.
 
 ### Comparison to C++ code
 
-@@@
+![Conditional Sequence](images/tutorial/conditional-sequence.png)
 
 Above Blueprint is same as below code in C++.
 
 ```cpp
-if (Cond1) {
-    Exec1();
+if (Condition_0) {
+    UKismetSystemLibrary::PrintString(GEngine->GetWorld(), "Condition 0");
 }
-if (Cond2) {
-    Exec2();
+if (Condition_1) {
+    UKismetSystemLibrary::PrintString(GEngine->GetWorld(), "Condition 1");
 }
-Default();
+UKismetSystemLibrary::PrintString(GEngine->GetWorld(), "Default");
 ```
 
 ### Additional Info
