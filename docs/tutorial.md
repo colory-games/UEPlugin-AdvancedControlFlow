@@ -3,9 +3,9 @@
 ## MultiBranch
 
 MultiBranch node realizes multiple conditional branches (like if-elseif-else statement).  
-Comparision to the implementation on the vanila Unreal Engine is as follows.
+Comparision to the implementation on the vanilla Unreal Engine is as follows.
 
-![Vanila vs MultiBranch](images/tutorial/vanila_vs_multibranch.png)
+![Vanila vs MultiBranch](images/tutorial/vanilla_vs_multibranch.png)
 
 ### Usage
 
@@ -36,9 +36,9 @@ if (Condition_0) {
 ## Conditional Sequence
 
 MultiBranch node execute all relevant execution pins if the conditional pin is true.  
-Comparision to the implementation on the vanila Unreal Engine is as follows.
+Comparision to the implementation on the vanilla Unreal Engine is as follows.
 
-![Vanila vs Conditional Sequence](images/tutorial/vanila_vs_conditional-sequence.png)
+![Vanila vs Conditional Sequence](images/tutorial/vanilla_vs_conditional-sequence.png)
 
 ### Usage
 
