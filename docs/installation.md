@@ -14,7 +14,7 @@ Generate project files (for example with right mouse click on the .uproject file
 
 #### 4. Build
 
-Build the project.
+Build the project in Visual Studio.
 
 #### 5. Launch Unreal Engine editor and enable the plugin
 

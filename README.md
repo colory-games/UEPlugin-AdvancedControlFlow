@@ -1,6 +1,6 @@
 # Unreal Engine Plugin: Advanced Control Flow
 
-Advanced Control Flow is a Unreal Engine plugin which adds custom Blueprint nodes to realize the complex control flow.
+Advanced Control Flow is a Unreal Engine plugin which adds Blueprint nodes to realize the complex control flow.
 
 The typical use case of this plugin is when you try to realize the if-elseif-else statement.  
 To realize if-elseif-else statement on the vanilla Unreal Engine, you need to stack the multiple branch nodes to check multiple conditions.  
@@ -13,7 +13,7 @@ By using this plugin, you can realize this case with only one MultiBranch node.
 * MultiBranch
   * Realize if-elseif-else statement (multiple conditional branches).
 * Conditional Sequence
-  * Execute all relevant execution pins if the conditional pin is true.
+  * Execute each relevant execution pins if each conditional pin is true.
 
 ## Supported Environment
 
@@ -46,7 +46,7 @@ You can also discuss about this plugin at [Discord](https://discord.gg/Tg9A5JxR)
 ### Owner
 
 This project is owned by the members of [Colory Games](https://colory-games.net/).  
-The main mainter of this project is as follows.
+The maintainer of this project is as follows.
 
 |Name|Contact|
 |---|---|

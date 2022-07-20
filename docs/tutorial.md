@@ -35,7 +35,7 @@ if (Condition_0) {
 
 ## Conditional Sequence
 
-MultiBranch node execute all relevant execution pins if the conditional pin is true.  
+Conditional Sequence node execute each relevant execution pins if each conditional pin is true.  
 Comparision to the implementation on the vanilla Unreal Engine is as follows.
 
 ![Vanila vs Conditional Sequence](images/tutorial/vanilla_vs_conditional-sequence.png)
