@@ -61,7 +61,6 @@ void UK2Node_ConditionalSequence::ExpandNode(FKismetCompilerContext& CompilerCon
 		Sequence->AllocateDefaultPins();
 
 		CompilerContext.MovePinLinksToIntermediate(*ExecTriggeringPin, *Sequence->GetExecPin());
-		CompilerContext.MovePinLinksToIntermediate(*DefaultExecPin, *Sequence->GetThenPinGivenIndex(0));
 
 		for (int32 Index = 0; Index < CasePairs.Num(); ++Index)
 		{
@@ -72,7 +71,7 @@ void UK2Node_ConditionalSequence::ExpandNode(FKismetCompilerContext& CompilerCon
 
 			UEdGraphPin* CaseCondPin = CasePairs[Index].Key;
 			UEdGraphPin* CaseExecPin = CasePairs[Index].Value;
-			UEdGraphPin* SequenceExecPin = Sequence->GetThenPinGivenIndex(Index + 1);
+			UEdGraphPin* SequenceExecPin = Sequence->GetThenPinGivenIndex(Index);
 			UEdGraphPin* IfThenElseExecPin = IfThenElse->GetExecPin();
 			UEdGraphPin* IfThenElseThenPin = IfThenElse->GetThenPin();
 			UEdGraphPin* IfThenElseCondPin = IfThenElse->GetConditionPin();
@@ -81,6 +80,8 @@ void UK2Node_ConditionalSequence::ExpandNode(FKismetCompilerContext& CompilerCon
 			CompilerContext.MovePinLinksToIntermediate(*CaseExecPin, *IfThenElseThenPin);
 			CompilerContext.MovePinLinksToIntermediate(*CaseCondPin, *IfThenElseCondPin);
 		}
+
+		CompilerContext.MovePinLinksToIntermediate(*DefaultExecPin, *Sequence->GetThenPinGivenIndex(CasePairs.Num()));
 	}
 
 	BreakAllNodeLinks();
