@@ -38,8 +38,8 @@ jobs:
       - name: Compress sample project's sources
         run: |
           mkdir release-sample
-          zip -r SampleProject.zip samples/SampleProject
-          mv SampleProject.zip release-sample
+          cd samples && zip -r SampleProject.zip SampleProject && cd ..
+          mv samples/SampleProject.zip release-sample
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
