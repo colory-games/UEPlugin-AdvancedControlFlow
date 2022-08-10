@@ -84,4 +84,5 @@ jobs:
           for asset in dist/**/*.zip; do
             assets+=("-a" "$asset")
           done
-          hub release create "${assets[@]}" -m ${{ github.ref }} ${{ github.ref }}
+          tag_name="{GITHUB_REF##*/}"
+          hub release create "${assets[@]}" -m "$tag_name" "$tag_name"
