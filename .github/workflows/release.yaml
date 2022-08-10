@@ -67,11 +67,21 @@ jobs:
           release_name: ${{ github.ref }}
           draft: true
           prerelease: false
+      # - name: Publish GitHub Release Page
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_ACTIONS }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: dist/**/*.zip
+      #     asset_content_type: application/zip
       - name: Publish GitHub Release Page
-        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_ACTIONS }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/**/*.zip
-          asset_content_type: application/zip
+        run: |
+          set -x
+          assets=()
+          for asset in dist/**/*.zip; do
+            assets+=("-a" "$asset")
+          done
+          hub release create "${assets[@]}" -m ${{ github.ref }} ${{ github.ref }}
