@@ -9,28 +9,47 @@ on:
   pull_request:
 
 jobs:
-  pack:
+  plugin-pack:
     name: Pack plugin sources
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Compress add-on
+      - name: Compress plugin's sources
         run: |
-          mkdir release
+          mkdir release-plugin
           zip -r AdvancedControlFlow.zip AdvancedControlFlow
-          mv AdvancedControlFlow.zip release
+          mv AdvancedControlFlow.zip release-plugin
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: AdvancedControlFlow
-          path: "release"
+          path: "release-plugin"
 
-  publish:
+  sample-pack:
+    name: Pack sample sources
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Compress sample project's sources
+        run: |
+          mkdir release-sample
+          cd samples && zip -r SampleProject.zip SampleProject && cd ..
+          mv samples/SampleProject.zip release-sample
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: SampleProject
+          path: "release-sample"
+
+  plugin-publish:
     name: Publish plugin
-    needs: pack
+    needs: plugin-pack
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-18.04
     steps:
@@ -48,7 +67,7 @@ jobs:
           release_name: ${{ github.ref }}
           draft: true
           prerelease: false
-      - name: Publish Add-on to GitHub Release Page
+      - name: Publish plugin to GitHub Release Page
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_ACTIONS }}
@@ -56,4 +75,34 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: dist/AdvancedControlFlow/AdvancedControlFlow.zip
           asset_name: AdvancedControlFlow.zip
+          asset_content_type: application/zip
+
+  sample-publish:
+    name: Publish sample
+    needs: sample-pack
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Fetch Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: dist
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_ACTIONS }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: true
+          prerelease: false
+      - name: Publish sample to GitHub Release Page
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_ACTIONS }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: dist/SampleProject/SampleProject.zip
+          asset_name: SampleProject.zip
           asset_content_type: application/zip
