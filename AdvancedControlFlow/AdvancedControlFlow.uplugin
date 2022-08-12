@@ -4,6 +4,8 @@
   "VersionName": "1.0.0",
   "FriendlyName": "Advanced Control Flow",
   "Description": "Blueprint nodes to realize the complex control flow",
+  "EngineVersion": "5.0.0",
+  "WhitelistPlatforms": ["Win64", "Win32", "Mac", "Linux"],
   "Category": "Other",
   "CreatedBy": "nutti (Colory Games)",
   "CreatedByURL": "https://github.com/colory-games/UEPlugin-AdvancedControlFlow",
