@@ -5,8 +5,8 @@ set -eEu
 
 
 SUPPORTED_VERSIONS=(
-    "4.27"
-    "5.0"
+    "4.27.0"
+    "5.0.0"
 )
 
 function usage() {
@@ -34,4 +34,5 @@ fi
 
 for file in `find -name "*.uplugin" ${source_dir}`; do
     sed -i s/"EngineVersion": "5.0.0",/"EngineVersion": ${engine_version}/g ${file}
+    echo "Replaced engine version in ${file}"
 done
