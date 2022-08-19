@@ -1,24 +1,36 @@
 workflows:
-  version: 2
+  version: 2.1
   build:
     jobs:
       - build-plugin:
           context:
             - unreal-engine-ci
+          matrix:
+            parameters:
+              unreal-engine-version: ["4.27.0", "5.0.0"]
       - build-sample:
           context:
             - unreal-engine-ci
+          matrix:
+            parameters:
+              unreal-engine-version: ["5.0.0"]
 
-version: 2
+version: 2.1
 jobs:
   build-plugin:
+    parameters:
+      unreal-engine-version:
+        type: string
     docker:
-      - image: ghcr.io/epicgames/unreal-engine:dev-slim-5.0
+      - image: ghcr.io/epicgames/unreal-engine:dev-slim-<< parameters.unreal-engine-version >>
         auth:
           username: $GHCR_USERNAME
           password: $GHCR_PASSWORD
     steps:
       - checkout
+      - run:
+          name: "Run scripts for the release"
+          command: bash tools/replace_engine_version.sh AdvancedControlFlow << parameters.unreal-engine-version >>
       - run:
           name: "Build Plugin"
           command: |
@@ -28,13 +40,24 @@ jobs:
               -Rocket
 
   build-sample:
+    parameters:
+      unreal-engine-version:
+        type: string
     docker:
-      - image: ghcr.io/epicgames/unreal-engine:dev-slim-5.0
+      - image: ghcr.io/epicgames/unreal-engine:dev-slim-<< parameters.unreal-engine-version >>
         auth:
           username: $GHCR_USERNAME
           password: $GHCR_PASSWORD
     steps:
       - checkout
+      - run:
+          name: "Run scripts for the release"
+          command: bash tools/replace_engine_version.sh AdvancedControlFlow << parameters.unreal-engine-version >>
+      - run:
+          name: "Copy plugin sources"
+          command: |
+            mkdir ${PWD}/samples/SampleProject/Plugins
+            cp -r AdvancedControlFlow ${PWD}/samples/SampleProject/Plugins
       - run:
           name: "Build Sample"
           command: |

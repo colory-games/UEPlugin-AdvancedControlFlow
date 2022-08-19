@@ -11,6 +11,7 @@
 
 #include "K2Node.h"
 #include "K2Node_AddPinInterface.h"
+#include "Misc/EngineVersionComparison.h"
 
 #include "K2Node_CondExecPairedNode.generated.h"
 
@@ -32,7 +33,11 @@ class UK2Node_CondExecPairedNode : public UK2Node, public IK2Node_AddPinInterfac
 public:
 	// Override from IK2Node_AddPinInterface
 	virtual void AddInputPin() override;
+#if UE_VERSION_OLDER_THAN(5, 0, 0)
+	virtual void RemoveInputPin(UEdGraphPin* Pin);
+#else
 	virtual void RemoveInputPin(UEdGraphPin* Pin) override;
+#endif
 
 protected:
 	// Override from UK2Node

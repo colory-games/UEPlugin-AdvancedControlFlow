@@ -12,15 +12,24 @@ jobs:
   plugin-pack:
     name: Pack plugin sources
     runs-on: ubuntu-18.04
+    strategy:
+      fail-fast: false
+      matrix:
+        unreal_engine_version:
+          ["4.26.0", "4.27.0", "5.0.0"]
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
 
+      - name: Run scripts for the release
+        run: |
+          bash tools/replace_engine_version.sh AdvancedControlFlow ${{ matrix.unreal_engine_version }}
+
       - name: Compress plugin's sources
         run: |
           mkdir release-plugin
-          zip -r AdvancedControlFlow.zip AdvancedControlFlow
-          mv AdvancedControlFlow.zip release-plugin
+          zip -r AdvancedControlFlow_UE${{ matrix.unreal_engine_version }}.zip AdvancedControlFlow
+          mv AdvancedControlFlow_UE${{ matrix.unreal_engine_version }}.zip release-plugin
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2

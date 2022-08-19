@@ -345,8 +345,13 @@ void UK2Node_CondExecPairedNode::RemoveCasePinAt(int32 CaseIndex)
 
 	Pins.Remove(CaseExecPinToRemove);
 	Pins.Remove(CaseCondPinToRemove);
+#if UE_VERSION_OLDER_THAN(5, 0, 0)
+	CaseExecPinToRemove->MarkPendingKill();
+	CaseCondPinToRemove->MarkPendingKill();
+#else
 	CaseExecPinToRemove->MarkAsGarbage();
 	CaseCondPinToRemove->MarkAsGarbage();
+#endif
 
 	int32 Index = 0;
 	for (auto& P : Pins)
