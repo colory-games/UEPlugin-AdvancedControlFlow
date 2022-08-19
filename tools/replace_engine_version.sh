@@ -5,7 +5,7 @@ set -eEu
 
 
 SUPPORTED_VERSIONS=(
-    "4.27.0"
+    "4.26.0" "4.27.0"
     "5.0.0"
 )
 
