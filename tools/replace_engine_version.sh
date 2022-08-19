@@ -17,8 +17,8 @@ if [ $# -ne 2 ]; then
     exit 1
 fi
 
-engine_version=${1}
-source_dir=${2}
+source_dir=${1}
+engine_version=${2}
 
 supported=0
 for v in "${SUPPORTED_VERSIONS[@]}"; do
