@@ -5,16 +5,19 @@ workflows:
       - build-plugin:
           context:
             - unreal-engine-ci
+          matrix:
+            parameters:
+              unreal_engine_version: ["4.27", "5.0"]
       - build-sample:
           context:
             - unreal-engine-ci
+          matrix:
+            parameters:
+              unreal_engine_version: ["4.27", "5.0"]
 
 version: 2
 jobs:
   build-plugin:
-    matrix:
-      parameters:
-        unreal_engine_version: ["4.27", "5.0"]
     docker:
       - image: ghcr.io/epicgames/unreal-engine:dev-slim-<< matrix.unreal_engine_version >>
         auth:
@@ -31,9 +34,6 @@ jobs:
               -Rocket
 
   build-sample:
-    matrix:
-      parameters:
-        unreal_engine_version: ["4.27", "5.0"]
     docker:
       - image: ghcr.io/epicgames/unreal-engine:dev-slim-<< matrix.unreal_engine_version >>
         auth:
