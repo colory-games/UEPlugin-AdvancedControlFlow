@@ -206,7 +206,7 @@ UEdGraphPin* UK2Node_MultiBranch::GetFunctionPin() const
 void UK2Node_MultiBranch::CreateFunctionPin()
 {
 	FCreatePinParams Params;
-	Params.Index = 2;
+	Params.Index = AllocateNonCasePinIndex();
 	UEdGraphPin* FunctionPin =
 		CreatePin(EGPD_Input, UEdGraphSchema_K2::PC_Object, ConditionPreProcessFuncClass, ConditionPreProcessFuncName, Params);
 	FunctionPin->bDefaultValueIsReadOnly = true;

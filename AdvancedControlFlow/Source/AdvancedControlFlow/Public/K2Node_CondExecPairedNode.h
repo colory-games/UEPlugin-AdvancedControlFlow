@@ -77,12 +77,14 @@ protected:
 	void RemoveFirstCasePin();
 	void RemoveLastCasePin();
 	bool IsCasePin(const UEdGraphPin* Pin) const;
+	int32 AllocateNonCasePinIndex();
 
 	virtual void CreateExecTriggeringPin();
 	virtual void CreateDefaultExecPin();
 
 	FString NodeContextMenuSectionName;
 	FString NodeContextMenuSectionLabel;
+	int32 CasePinStartIndex = 0;
 
 public:
 	UK2Node_CondExecPairedNode(const FObjectInitializer& ObjectInitializer);

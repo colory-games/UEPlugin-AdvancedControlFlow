@@ -428,6 +428,11 @@ bool UK2Node_CondExecPairedNode::IsCasePin(const UEdGraphPin* Pin) const
 	return true;
 }
 
+int32 UK2Node_CondExecPairedNode::AllocateNonCasePinIndex()
+{
+	return CasePinStartIndex++;
+}
+
 CasePinPair UK2Node_CondExecPairedNode::AddCasePinPair(int32 CaseIndex)
 {
 	CasePinPair Pair;
@@ -435,7 +440,7 @@ CasePinPair UK2Node_CondExecPairedNode::AddCasePinPair(int32 CaseIndex)
 
 	{
 		FCreatePinParams Params;
-		Params.Index = 3 + CaseIndex;
+		Params.Index = CasePinStartIndex + CaseIndex;
 		Pair.Key = CreatePin(
 			EGPD_Input, UEdGraphSchema_K2::PC_Boolean, *GetCasePinName(CaseCondPinNamePrefix.ToString(), CaseIndex), Params);
 		Pair.Key->PinFriendlyName =
@@ -443,7 +448,7 @@ CasePinPair UK2Node_CondExecPairedNode::AddCasePinPair(int32 CaseIndex)
 	}
 	{
 		FCreatePinParams Params;
-		Params.Index = 3 + N + CaseIndex + 1;
+		Params.Index = CasePinStartIndex + N + CaseIndex + 1;
 		Pair.Value = CreatePin(
 			EGPD_Output, UEdGraphSchema_K2::PC_Exec, *GetCasePinName(CaseExecPinNamePrefix.ToString(), CaseIndex), Params);
 		Pair.Value->PinFriendlyName =
@@ -471,14 +476,14 @@ UEdGraphPin* UK2Node_CondExecPairedNode::GetDefaultExecPin() const
 void UK2Node_CondExecPairedNode::CreateExecTriggeringPin()
 {
 	FCreatePinParams Params;
-	Params.Index = 0;
+	Params.Index = AllocateNonCasePinIndex();
 	CreatePin(EGPD_Input, UEdGraphSchema_K2::PC_Exec, UEdGraphSchema_K2::PN_Execute, Params);
 }
 
 void UK2Node_CondExecPairedNode::CreateDefaultExecPin()
 {
 	FCreatePinParams Params;
-	Params.Index = 1;
+	Params.Index = AllocateNonCasePinIndex();
 	UEdGraphPin* DefaultExecPin = CreatePin(EGPD_Output, UEdGraphSchema_K2::PC_Exec, DefaultExecPinName, Params);
 	DefaultExecPin->PinFriendlyName = FText::AsCultureInvariant(DefaultExecPinFriendlyName.ToString());
 }
