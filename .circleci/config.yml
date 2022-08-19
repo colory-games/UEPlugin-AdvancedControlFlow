@@ -18,6 +18,8 @@ workflows:
 version: 2
 jobs:
   build-plugin:
+    parameters:
+      unreal_engine_version: string
     docker:
       - image: ghcr.io/epicgames/unreal-engine:dev-slim-<< matrix.unreal_engine_version >>
         auth:
@@ -34,6 +36,8 @@ jobs:
               -Rocket
 
   build-sample:
+    parameters:
+      unreal_engine_version: string
     docker:
       - image: ghcr.io/epicgames/unreal-engine:dev-slim-<< matrix.unreal_engine_version >>
         auth:
