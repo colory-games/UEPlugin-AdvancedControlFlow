@@ -10,11 +10,11 @@ SUPPORTED_VERSIONS=(
 )
 
 function usage() {
-    echo "Usage: bash replace_engine_version.sh <source-directory> <engine-version>"
+    
 }
 
 if [ $# -ne 2 ]; then
-    usage()
+    usage
     exit 1
 fi
 
