@@ -53,7 +53,7 @@ void UK2Node_CondExecPairedNode::GetNodeContextMenuActions(class UToolMenu* Menu
 		FToolMenuSection& Section =
 			Menu->AddSection(FName(NodeContextMenuSectionName), FText::AsCultureInvariant(NodeContextMenuSectionLabel));
 
-		if (Context->Node->Pins.Num() >= 1)
+		if (Context->Pin != nullptr && IsCasePin(Context->Pin))
 		{
 			Section.AddMenuEntry("AddCasePinBefore", LOCTEXT("AddCasePinBefore", "Add case pin before"),
 				LOCTEXT("AddCasePinBeforeTooltip", "Add case pin before this pin on this node"), FSlateIcon(),
@@ -63,6 +63,14 @@ void UK2Node_CondExecPairedNode::GetNodeContextMenuActions(class UToolMenu* Menu
 				LOCTEXT("AddCasePinAfterTooltip", "Add case pin after this pin on this node"), FSlateIcon(),
 				FUIAction(FExecuteAction::CreateUObject(const_cast<UK2Node_CondExecPairedNode*>(this),
 					&UK2Node_CondExecPairedNode::AddCasePinAfter, const_cast<UEdGraphPin*>(Context->Pin))));
+			Section.AddMenuEntry("RemoveThisCasePin", LOCTEXT("RemoveThisCasePin", "Remove this case pin"),
+				LOCTEXT("RemoveThisCasePinTooltip", "Remove this case pin on this node"), FSlateIcon(),
+				FUIAction(FExecuteAction::CreateUObject(const_cast<UK2Node_CondExecPairedNode*>(this),
+					&UK2Node_CondExecPairedNode::RemoveInputPin, const_cast<UEdGraphPin*>(Context->Pin))));
+		}
+
+		if (Context->Node->Pins.Num() >= 1)
+		{
 			Section.AddMenuEntry("RemoveFirstCasePin", LOCTEXT("RemoveFirstCasePin", "Remove first case pin"),
 				LOCTEXT("RemoveFirstCasePinTooltip", "Remove first case pin on this node"), FSlateIcon(),
 				FUIAction(FExecuteAction::CreateUObject(
@@ -71,14 +79,6 @@ void UK2Node_CondExecPairedNode::GetNodeContextMenuActions(class UToolMenu* Menu
 				LOCTEXT("RemoveLastCasePinTooltip", "Remove last case pin on this node"), FSlateIcon(),
 				FUIAction(FExecuteAction::CreateUObject(
 					const_cast<UK2Node_CondExecPairedNode*>(this), &UK2Node_CondExecPairedNode::RemoveLastCasePin)));
-		}
-
-		if (Context->Pin != nullptr)
-		{
-			Section.AddMenuEntry("RemoveThisCasePin", LOCTEXT("RemoveThisCasePin", "Remove this case pin"),
-				LOCTEXT("RemoveThisCasePinTooltip", "Remove this case pin on this node"), FSlateIcon(),
-				FUIAction(FExecuteAction::CreateUObject(const_cast<UK2Node_CondExecPairedNode*>(this),
-					&UK2Node_CondExecPairedNode::RemoveInputPin, const_cast<UEdGraphPin*>(Context->Pin))));
 		}
 	}
 }
@@ -410,7 +410,7 @@ TArray<CasePinPair> UK2Node_CondExecPairedNode::GetCasePinPairs() const
 	return CasePairs;
 }
 
-bool UK2Node_CondExecPairedNode::IsCasePin(UEdGraphPin* Pin) const
+bool UK2Node_CondExecPairedNode::IsCasePin(const UEdGraphPin* Pin) const
 {
 	TArray<FName> NonCasePinName = {
 		UEdGraphSchema_K2::PN_Execute,

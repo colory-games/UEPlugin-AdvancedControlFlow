@@ -76,7 +76,7 @@ protected:
 	void RemoveCasePinAt(int32 CaseIndex);
 	void RemoveFirstCasePin();
 	void RemoveLastCasePin();
-	bool IsCasePin(UEdGraphPin* Pin) const;
+	bool IsCasePin(const UEdGraphPin* Pin) const;
 
 	virtual void CreateExecTriggeringPin();
 	virtual void CreateDefaultExecPin();
