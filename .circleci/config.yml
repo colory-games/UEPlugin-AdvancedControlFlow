@@ -1,5 +1,5 @@
 workflows:
-  version: 2
+  version: 2.1
   build:
     jobs:
       - build-plugin:
@@ -15,13 +15,13 @@ workflows:
             parameters:
               unreal-engine-version: ["4.27", "5.0"]
 
-version: 2
+version: 2.1
 jobs:
   build-plugin:
     parameters:
-      unreal_engine_version: string
+      unreal-engine-version: string
     docker:
-      - image: ghcr.io/epicgames/unreal-engine:dev-slim-<< matrix.unreal_engine_version >>
+      - image: ghcr.io/epicgames/unreal-engine:dev-slim-<< matrix.unreal-engine-version >>
         auth:
           username: $GHCR_USERNAME
           password: $GHCR_PASSWORD
@@ -37,9 +37,9 @@ jobs:
 
   build-sample:
     parameters:
-      unreal_engine_version: string
+      unreal-engine-version: string
     docker:
-      - image: ghcr.io/epicgames/unreal-engine:dev-slim-<< matrix.unreal_engine_version >>
+      - image: ghcr.io/epicgames/unreal-engine:dev-slim-<< matrix.unreal-engine-version >>
         auth:
           username: $GHCR_USERNAME
           password: $GHCR_PASSWORD
