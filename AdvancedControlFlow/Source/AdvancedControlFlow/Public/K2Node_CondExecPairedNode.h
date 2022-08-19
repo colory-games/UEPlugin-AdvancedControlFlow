@@ -11,6 +11,7 @@
 
 #include "K2Node.h"
 #include "K2Node_AddPinInterface.h"
+#include "Misc/EngineVersionComparison.h"
 
 #include "K2Node_CondExecPairedNode.generated.h"
 
