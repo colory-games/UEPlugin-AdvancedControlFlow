@@ -21,7 +21,7 @@ jobs:
     parameters:
       unreal-engine-version: string
     docker:
-      - image: ghcr.io/epicgames/unreal-engine:dev-slim-<< matrix.unreal-engine-version >>
+      - image: ghcr.io/epicgames/unreal-engine:dev-slim-<< parameters.unreal-engine-version >>
         auth:
           username: $GHCR_USERNAME
           password: $GHCR_PASSWORD
@@ -39,7 +39,7 @@ jobs:
     parameters:
       unreal-engine-version: string
     docker:
-      - image: ghcr.io/epicgames/unreal-engine:dev-slim-<< matrix.unreal-engine-version >>
+      - image: ghcr.io/epicgames/unreal-engine:dev-slim-<< parameters.unreal-engine-version >>
         auth:
           username: $GHCR_USERNAME
           password: $GHCR_PASSWORD
