@@ -11,6 +11,7 @@
 
 #include "SGraphNodeCondExecPairedNode.h"
 
+#include "EditorStyleSet.h"
 #include "GraphEditorSettings.h"
 #include "K2Node_CondExecPairedNode.h"
 #include "Kismet2/BlueprintEditorUtils.h"
