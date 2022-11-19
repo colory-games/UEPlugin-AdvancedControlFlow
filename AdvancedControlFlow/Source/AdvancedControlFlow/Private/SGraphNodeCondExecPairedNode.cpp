@@ -11,6 +11,7 @@
 
 #include "SGraphNodeCondExecPairedNode.h"
 
+#include "DetailLayoutBuilder.h"
 #include "EditorStyleSet.h"
 #include "GraphEditorSettings.h"
 #include "K2Node_CondExecPairedNode.h"
@@ -75,6 +76,19 @@ void SGraphNodeCondExecPairedNode::CreatePinWidgets()
 
 void SGraphNodeCondExecPairedNode::CreateOutputSideAddButton(TSharedPtr<SVerticalBox> OutputBox)
 {
+	UK2Node_CondExecPairedNode* CondExecPairedNode = CastChecked<UK2Node_CondExecPairedNode>(GraphNode);
+
+#ifdef ACF_FREE_VERSION
+	if (CondExecPairedNode->GetCasePinCount() >= 3)
+	{
+		FMargin Padding = Settings->GetOutputPinPadding();
+		Padding.Top += 6.0f;
+		FText ErrorMessage = FText::FromString("Free Ver: Up to 3");
+		OutputBox->AddSlot().AutoHeight().VAlign(VAlign_Center).Padding(Padding)[SNew(STextBlock).Font(IDetailLayoutBuilder::GetDetailFont()).Text(ErrorMessage)];
+		return;
+	}
+#endif
+
 	// TODO: Use NSLOCTEXT macro
 	TSharedRef<SWidget> AddPinButton =
 		AddPinButtonContent(FText::AsCultureInvariant("Add pin"), FText::AsCultureInvariant("Add new pin"));

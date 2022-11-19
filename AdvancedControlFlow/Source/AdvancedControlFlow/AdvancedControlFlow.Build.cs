@@ -31,5 +31,9 @@ public class AdvancedControlFlow : ModuleRules
 			"ToolMenus",
 			"UnrealEd",
 		});
+
+		// @remove-start FULL_VERSION=true
+		PublicDefinitions.Add("ACF_FREE_VERSION");
+		// @remove-end
 	}
 }

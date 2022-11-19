@@ -1,8 +1,15 @@
 # Installation
 
+This page shows the installation process of the free trial version.  
+Free trial version has below limitations.
+
+* The number of conditional pin is up to 3.
+
+To get the benefit fully from this plugin, consider to buy this plugin at [the Marketplace](https://www.unrealengine.com/marketplace/en-US/product/advanced-control-flow).
+
 #### 1. Download source code
 
-Download whole project's source code from [GitHub](https://github.com/colory-games/UEPlugin-AdvancedControlFlow/archive/refs/heads/main.zip) and unzip it.
+Download whole source code from [the release page](https://github.com/colory-games/UEPlugin-AdvancedControlFlow/releases) and unzip it.
 
 #### 2. Move the plugin
 
