@@ -84,7 +84,10 @@ void SGraphNodeCondExecPairedNode::CreateOutputSideAddButton(TSharedPtr<SVertica
 		FMargin Padding = Settings->GetOutputPinPadding();
 		Padding.Top += 6.0f;
 		FText ErrorMessage = FText::FromString("Free Ver: Up to 3");
-		OutputBox->AddSlot().AutoHeight().VAlign(VAlign_Center).Padding(Padding)[SNew(STextBlock).Font(IDetailLayoutBuilder::GetDetailFont()).Text(ErrorMessage)];
+		OutputBox->AddSlot()
+			.AutoHeight()
+			.VAlign(VAlign_Center)
+			.Padding(Padding)[SNew(STextBlock).Font(IDetailLayoutBuilder::GetDetailFont()).Text(ErrorMessage)];
 		return;
 	}
 #endif
