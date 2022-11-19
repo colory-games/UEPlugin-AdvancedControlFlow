@@ -56,7 +56,7 @@ void UK2Node_CondExecPairedNode::GetNodeContextMenuActions(class UToolMenu* Menu
 		if (Context->Pin != nullptr && IsCasePin(Context->Pin))
 		{
 #ifdef ACF_FREE_VERSION
-			UK2Node_CondExecPairedNode* CondExecPairedNode = CastChecked<UK2Node_CondExecPairedNode>(Context->Node);
+			const UK2Node_CondExecPairedNode* CondExecPairedNode = CastChecked<UK2Node_CondExecPairedNode>(Context->Node);
 			if (CondExecPairedNode->GetCasePinCount() < 3)
 			{
 #endif
