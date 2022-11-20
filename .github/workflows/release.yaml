@@ -23,6 +23,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
+      - name: Run scripts for the license removing
+        run: |
+          bash tools/remove_license.sh AccessVariableByName ${{ matrix.version }}
+
       - name: Run scripts for the code removing
         run: |
           bash tools/remove_code.sh AdvancedControlFlow ${{ matrix.unreal_engine_version }} ${{ matrix.version }} .
