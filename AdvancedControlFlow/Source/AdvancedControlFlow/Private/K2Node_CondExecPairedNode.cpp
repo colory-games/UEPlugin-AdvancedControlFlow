@@ -55,14 +55,22 @@ void UK2Node_CondExecPairedNode::GetNodeContextMenuActions(class UToolMenu* Menu
 
 		if (Context->Pin != nullptr && IsCasePin(Context->Pin))
 		{
-			Section.AddMenuEntry("AddCasePinBefore", LOCTEXT("AddCasePinBefore", "Add case pin before"),
-				LOCTEXT("AddCasePinBeforeTooltip", "Add case pin before this pin on this node"), FSlateIcon(),
-				FUIAction(FExecuteAction::CreateUObject(const_cast<UK2Node_CondExecPairedNode*>(this),
-					&UK2Node_CondExecPairedNode::AddCasePinBefore, const_cast<UEdGraphPin*>(Context->Pin))));
-			Section.AddMenuEntry("AddCasePinAfter", LOCTEXT("AddCasePinAfter", "Add case pin after"),
-				LOCTEXT("AddCasePinAfterTooltip", "Add case pin after this pin on this node"), FSlateIcon(),
-				FUIAction(FExecuteAction::CreateUObject(const_cast<UK2Node_CondExecPairedNode*>(this),
-					&UK2Node_CondExecPairedNode::AddCasePinAfter, const_cast<UEdGraphPin*>(Context->Pin))));
+#ifdef ACF_FREE_VERSION
+			const UK2Node_CondExecPairedNode* CondExecPairedNode = CastChecked<UK2Node_CondExecPairedNode>(Context->Node);
+			if (CondExecPairedNode->GetCasePinCount() < 3)
+			{
+#endif
+				Section.AddMenuEntry("AddCasePinBefore", LOCTEXT("AddCasePinBefore", "Add case pin before"),
+					LOCTEXT("AddCasePinBeforeTooltip", "Add case pin before this pin on this node"), FSlateIcon(),
+					FUIAction(FExecuteAction::CreateUObject(const_cast<UK2Node_CondExecPairedNode*>(this),
+						&UK2Node_CondExecPairedNode::AddCasePinBefore, const_cast<UEdGraphPin*>(Context->Pin))));
+				Section.AddMenuEntry("AddCasePinAfter", LOCTEXT("AddCasePinAfter", "Add case pin after"),
+					LOCTEXT("AddCasePinAfterTooltip", "Add case pin after this pin on this node"), FSlateIcon(),
+					FUIAction(FExecuteAction::CreateUObject(const_cast<UK2Node_CondExecPairedNode*>(this),
+						&UK2Node_CondExecPairedNode::AddCasePinAfter, const_cast<UEdGraphPin*>(Context->Pin))));
+#ifdef ACF_FREE_VERSION
+			}
+#endif
 			Section.AddMenuEntry("RemoveThisCasePin", LOCTEXT("RemoveThisCasePin", "Remove this case pin"),
 				LOCTEXT("RemoveThisCasePinTooltip", "Remove this case pin on this node"), FSlateIcon(),
 				FUIAction(FExecuteAction::CreateUObject(const_cast<UK2Node_CondExecPairedNode*>(this),

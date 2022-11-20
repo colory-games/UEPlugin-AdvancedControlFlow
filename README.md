@@ -25,8 +25,16 @@ This plugin supports on the below environment.
 
 ## Installation
 
-This plugin is basically free.  
-See [the document](docs/installation.md) if you want to install a free version.
+This plugin is distributed at [the Marketplace](https://www.unrealengine.com/marketplace/en-US/product/advanced-control-flow).  
+You can buy and install from there.
+
+Free trial version is also available.  
+See [the installation document](docs/installation.md) if you want to install a free trial version.  
+Free trial version has below limitations.
+
+* The number of conditional pin is up to 3.
+
+To get the benefit fully from this plugin, consider to buy this plugin at [the Marketplace](https://www.unrealengine.com/marketplace/en-US/product/advanced-control-flow).
 
 ## Tutorial
 
