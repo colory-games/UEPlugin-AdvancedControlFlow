@@ -12,7 +12,9 @@
 #include "EdGraphUtilities.h"
 #include "K2Node_ConditionalSequence.h"
 #include "K2Node_MultiBranch.h"
+#include "K2Node_MultiConditionalSelect.h"
 #include "SGraphNodeCondExecPairedNode.h"
+#include "SGraphNodeMultiConditionalSelect.h"
 
 #define LOCTEXT_NAMESPACE "FAdvancedControlFlowModule"
 
@@ -27,6 +29,10 @@ class FGraphPanelNodeFactory_AdvancedControlFlow : public FGraphPanelNodeFactory
 		else if (UK2Node_ConditionalSequence* ConditionalSequence = Cast<UK2Node_ConditionalSequence>(Node))
 		{
 			return SNew(SGraphNodeCondExecPairedNode, ConditionalSequence);
+		}
+		else if (UK2Node_MultiConditionalSelect* MultiConditionalSelect = Cast<UK2Node_MultiConditionalSelect>(Node))
+		{
+			return SNew(SGraphNodeMultiConditionalSelect, MultiConditionalSelect);
 		}
 
 		return nullptr;
