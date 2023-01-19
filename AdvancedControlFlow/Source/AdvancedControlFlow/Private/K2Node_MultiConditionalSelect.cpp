@@ -50,6 +50,11 @@ void UK2Node_MultiConditionalSelect::AllocateDefaultPins()
 	CreateDefaultOptionPin();
 	CreateReturnValuePin();
 
+	for (int Index = 0; Index < 2; ++Index)
+	{
+		AddCasePinPair(Index);
+	}
+
 	Super::AllocateDefaultPins();
 }
 
