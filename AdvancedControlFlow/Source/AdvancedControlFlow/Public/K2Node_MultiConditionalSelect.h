@@ -9,15 +9,14 @@
 
 #pragma once
 
-#include "K2Node.h"
+#include "BlueprintActionDatabaseRegistrar.h"
+#include "K2Node_CasePairedPinsNode.h"
 
 #include "K2Node_MultiConditionalSelect.generated.h"
 
- // { Case Option Pin : Case Condition Pin }
-typedef TPair<UEdGraphPin*, UEdGraphPin*> CasePinPair;
 
 UCLASS(MinimalAPI, meta = (Keywords = "Select"))
-class UK2Node_MultiConditionalSelect : public UK2Node
+class UK2Node_MultiConditionalSelect : public UK2Node_CasePairedPinsNode
 {
 	GENERATED_BODY()
 
@@ -30,7 +29,6 @@ class UK2Node_MultiConditionalSelect : public UK2Node
 	virtual void PinConnectionListChanged(UEdGraphPin* Pin) override;
 
 	// Override from UK2Node
-	virtual void GetNodeContextMenuActions(class UToolMenu* Menu, class UGraphNodeContextMenuContext* Context) const override;
 	virtual void ReallocatePinsDuringReconstruction(TArray<UEdGraphPin*>& OldPins) override;
 	virtual void GetMenuActions(FBlueprintActionDatabaseRegistrar& ActionRegistrar) const override;
 	virtual FText GetMenuCategory() const override;
@@ -41,39 +39,12 @@ class UK2Node_MultiConditionalSelect : public UK2Node
 	}
 
 	// Internal functions.
-	UEdGraphPin* GetOptionPinFromCaseIndex(int32 CaseIndex) const;
-	UEdGraphPin* GetConditionPinFromCaseIndex(int32 CaseIndex) const;
-	UEdGraphPin* GetConditionPinFromOptionPin(UEdGraphPin* OptionPin) const;
-	UEdGraphPin* GetOptionPinFromConditionPin(UEdGraphPin* ConditionPin) const;
-
-	CasePinPair AddCasePinPair(int32 CaseIndex);
-	FString GetCasePinName(const FString& Prefix, int32 CaseIndex) const;
-	FString GetCasePinFriendlyName(const FString& Prefix, int32 CaseIndex) const;
-	bool IsOptionPin(const UEdGraphPin* Pin) const;
-	bool IsConditionPin(const UEdGraphPin* Pin) const;
-
-	int32 GetCaseIndexFromCasePin(const FString& Prefix, UEdGraphPin* Pin) const;
-	CasePinPair GetCasePinPair(UEdGraphPin* Pin) const;
-	TArray<CasePinPair> GetCasePinPairs() const;
-
 	void CreateDefaultOptionPin();
 	void CreateReturnValuePin();
 	UEdGraphPin* GetDefaultOptionPin() const;
 	UEdGraphPin* GetReturnValuePin() const;
-
-	void AddCasePinAfter(UEdGraphPin* Pin);
-	void AddCasePinBefore(UEdGraphPin* Pin);
-	void RemoveCasePinAt(UEdGraphPin* Pin);
-	void RemoveCasePinAt(int32 CaseIndex);
-	void RemoveFirstCasePin();
-	void RemoveLastCasePin();
-
-	FString NodeContextMenuSectionName;
-	FString NodeContextMenuSectionLabel;
+	virtual CasePinPair AddCasePinPair(int32 CaseIndex) override;
 
 public:
 	UK2Node_MultiConditionalSelect(const FObjectInitializer& ObjectInitializer);
-
-	int32 GetCasePinCount() const;
-	void AddCasePinLast();
 };

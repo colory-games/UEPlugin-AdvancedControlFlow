@@ -10,12 +10,12 @@
 #pragma once
 
 #include "BlueprintActionDatabaseRegistrar.h"
-#include "K2Node_CondExecPairedNode.h"
+#include "K2Node_CasePairedPinsNode.h"
 
 #include "K2Node_MultiBranch.generated.h"
 
 UCLASS(MinimalAPI, meta = (Keywords = "If ElseIf Else Branch"))
-class UK2Node_MultiBranch : public UK2Node_CondExecPairedNode
+class UK2Node_MultiBranch : public UK2Node_CasePairedPinsNode
 {
 	GENERATED_BODY()
 
@@ -32,14 +32,18 @@ class UK2Node_MultiBranch : public UK2Node_CondExecPairedNode
 	virtual void GetMenuActions(FBlueprintActionDatabaseRegistrar& ActionRegistrar) const override;
 	virtual FText GetMenuCategory() const override;
 
-protected:
+	void CreateFunctionPin();
+	void CreateExecTriggeringPin();
+	void CreateDefaultExecPin();
+	virtual CasePinPair AddCasePinPair(int32 CaseIndex) override;
+
 	TSubclassOf<class UObject> ConditionPreProcessFuncClass;
 	FName ConditionPreProcessFuncName;
 
-	virtual void CreateFunctionPin();
 
 public:
 	UK2Node_MultiBranch(const FObjectInitializer& ObjectInitializer);
 
+	UEdGraphPin* GetDefaultExecPin() const;
 	UEdGraphPin* GetFunctionPin() const;
 };

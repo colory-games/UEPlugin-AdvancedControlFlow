@@ -11,16 +11,16 @@
 
 #include "SGraphNodeCasePairedPinsNode.h"
 
-class UK2Node_MultiConditionalSelect;
+class UK2Node_MultiBranch;
 
-class SGraphNodeMultiConditionalSelect : public SGraphNodeCasePairedPinsNode
+class SGraphNodeMultiBranch : public SGraphNodeCasePairedPinsNode
 {
-	SLATE_BEGIN_ARGS(SGraphNodeMultiConditionalSelect)
+	SLATE_BEGIN_ARGS(SGraphNodeMultiBranch)
 	{
 	}
 	SLATE_END_ARGS()
 
-	void Construct(const FArguments& InArgs, UK2Node_MultiConditionalSelect* InNode);
+	void Construct(const FArguments& InArgs, UK2Node_MultiBranch* InNode);
 
 	virtual void CreatePinWidgets() override;
 
