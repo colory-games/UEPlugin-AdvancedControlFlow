@@ -72,15 +72,17 @@ UKismetSystemLibrary::PrintString(GEngine->GetWorld(), "Default");
 
 ## Multi-Conditional Select
 
-Multi-Conditional Select node returns the option where the condition is true firstly.
-Comparison to the implementation on the vanilla Unreal Engine is as follows.
+Multi-Conditional Select node returns the option where the condition is true first.
+Comparison to the implementation on the vanila Unreal Engine is as follows.
+
+![Vanila vs Multi-Conditional Select](images/tutorial/vanilla_vs_multi-conditional-select.png)
 
 ### Usage
 
-1. Search and place Multi-Conditional Select node on the Blueprint editor.
+1. Search and place the Multi-Conditional Select node in the Blueprint editor.
 2. Click [Add Pin] to add a pin pair (option and condition).
-3. Build a logic by connecting among the nodes.
+3. Build a logic by connecting between the nodes.
 
 ### Additional Info
 
-* Some useful menu for adding/removing pins by right mouse click on the Conditional Sequence node.
+* Right mouse clicking on the Condition Sequence node opens a useful menu for adding/removing pins.

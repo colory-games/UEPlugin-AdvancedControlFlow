@@ -11,7 +11,7 @@
 
 #include "Modules/ModuleManager.h"
 
-#define LOCTEXT_NAMESPACE "FAdvancedControlFlowModule"
+#define LOCTEXT_NAMESPACE "AdvancedControlFlow"
 
 class FGraphPanelNodeFactory_AdvancedControlFlow;
 

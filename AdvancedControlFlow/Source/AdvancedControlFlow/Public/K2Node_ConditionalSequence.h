@@ -1,7 +1,7 @@
 /*!
  * AdvancedControlFlow
  *
- * Copyright (c) 2022 Colory Games
+ * Copyright (c) 2022-2023 Colory Games
  *
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,7 +13,7 @@
 
 #include "K2Node_ConditionalSequence.generated.h"
 
-UCLASS(MinimalAPI, meta = (Keywords = "Sequence Conditional"))
+UCLASS(MinimalAPI, meta = (Keywords = "Sequence Conditional ConditionalSequence"))
 class UK2Node_ConditionalSequence : public UK2Node_CasePairedPinsNode
 {
 	GENERATED_BODY()
