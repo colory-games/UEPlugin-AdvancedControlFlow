@@ -12,9 +12,8 @@
 #include "SGraphNodeMultiBranch.h"
 
 #include "K2Node_MultiBranch.h"
-#include "NodeFactory.h"
 #include "KismetPins/SGraphPinExec.h"
-
+#include "NodeFactory.h"
 
 class SGraphPinExecMultiBranch : public SGraphPinExec
 {
@@ -24,7 +23,7 @@ public:
 	}
 	SLATE_END_ARGS()
 
-		void Construct(const FArguments& InArgs, UEdGraphPin* InPin)
+	void Construct(const FArguments& InArgs, UEdGraphPin* InPin)
 	{
 		SGraphPin::Construct(SGraphPin::FArguments().PinLabelStyle(FName("Graph.Node.DefaultPinName")), InPin);
 

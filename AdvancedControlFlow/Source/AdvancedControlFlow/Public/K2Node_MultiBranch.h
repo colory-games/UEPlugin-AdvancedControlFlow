@@ -40,7 +40,6 @@ class UK2Node_MultiBranch : public UK2Node_CasePairedPinsNode
 	TSubclassOf<class UObject> ConditionPreProcessFuncClass;
 	FName ConditionPreProcessFuncName;
 
-
 public:
 	UK2Node_MultiBranch(const FObjectInitializer& ObjectInitializer);
 

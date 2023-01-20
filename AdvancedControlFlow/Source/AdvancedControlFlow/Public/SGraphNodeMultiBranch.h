@@ -23,5 +23,4 @@ class SGraphNodeMultiBranch : public SGraphNodeCasePairedPinsNode
 	void Construct(const FArguments& InArgs, UK2Node_MultiBranch* InNode);
 
 	virtual void CreatePinWidgets() override;
-
 };

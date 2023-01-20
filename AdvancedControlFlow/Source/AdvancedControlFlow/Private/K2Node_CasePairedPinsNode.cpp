@@ -11,9 +11,9 @@
 
 #include "K2Node_CasePairedPinsNode.h"
 
+#include "Internationalization/Regex.h"
 #include "Kismet2/BlueprintEditorUtils.h"
 #include "ToolMenu.h"
-#include "Internationalization/Regex.h"
 
 #define LOCTEXT_NAMESPACE "AdvancedControlFlow"
 
@@ -392,7 +392,7 @@ bool UK2Node_CasePairedPinsNode::IsCaseKeyPin(const UEdGraphPin* Pin) const
 {
 	FString PinName = Pin->GetFName().ToString();
 
-	FRegexPattern Pattern = FRegexPattern(FString::Format(TEXT("{0}_[0-9]+"), { CaseKeyPinNamePrefix.ToString() }));
+	FRegexPattern Pattern = FRegexPattern(FString::Format(TEXT("{0}_[0-9]+"), {CaseKeyPinNamePrefix.ToString()}));
 	FRegexMatcher Matcher(Pattern, PinName);
 
 	return Matcher.FindNext();
@@ -402,7 +402,7 @@ bool UK2Node_CasePairedPinsNode::IsCaseValuePin(const UEdGraphPin* Pin) const
 {
 	FString PinName = Pin->GetFName().ToString();
 
-	FRegexPattern Pattern = FRegexPattern(FString::Format(TEXT("{0}_[0-9]+"), { CaseValuePinNamePrefix.ToString() }));
+	FRegexPattern Pattern = FRegexPattern(FString::Format(TEXT("{0}_[0-9]+"), {CaseValuePinNamePrefix.ToString()}));
 	FRegexMatcher Matcher(Pattern, PinName);
 
 	return Matcher.FindNext();

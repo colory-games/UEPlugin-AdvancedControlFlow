@@ -56,7 +56,10 @@ protected:
 	FString GetCasePinName(const FString& Prefix, int32 CaseIndex) const;
 	FString GetCasePinFriendlyName(const FString& Prefix, int32 CaseIndex) const;
 
-	virtual CasePinPair AddCasePinPair(int32 CaseIndex) { return CasePinPair(); }
+	virtual CasePinPair AddCasePinPair(int32 CaseIndex)
+	{
+		return CasePinPair();
+	}
 	void AddCasePinAfter(UEdGraphPin* Pin);
 	void AddCasePinBefore(UEdGraphPin* Pin);
 	void RemoveCasePinAt(UEdGraphPin* Pin);

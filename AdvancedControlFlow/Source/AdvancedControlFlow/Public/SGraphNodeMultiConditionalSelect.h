@@ -23,5 +23,4 @@ class SGraphNodeMultiConditionalSelect : public SGraphNodeCasePairedPinsNode
 	void Construct(const FArguments& InArgs, UK2Node_MultiConditionalSelect* InNode);
 
 	virtual void CreatePinWidgets() override;
-
 };

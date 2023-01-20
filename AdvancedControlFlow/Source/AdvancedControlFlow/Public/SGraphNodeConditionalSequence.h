@@ -23,5 +23,4 @@ class SGraphNodeConditionalSequence : public SGraphNodeCasePairedPinsNode
 	void Construct(const FArguments& InArgs, UK2Node_ConditionalSequence* InNode);
 
 	virtual void CreatePinWidgets() override;
-
 };

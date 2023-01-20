@@ -13,12 +13,12 @@
 
 #include "BlueprintNodeSpawner.h"
 #include "EditorCategoryUtils.h"
-#include "K2Node_Select.h"
-#include "K2Node_MakeArray.h"
 #include "K2Node_CallFunction.h"
-#include "KismetCompiler.h"
+#include "K2Node_MakeArray.h"
+#include "K2Node_Select.h"
 #include "Kismet/KismetArrayLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "KismetCompiler.h"
 
 #define LOCTEXT_NAMESPACE "AdvancedControlFlow"
 
@@ -27,7 +27,8 @@ const FName ReturnValueOptionPinName(TEXT("Return Value"));
 const FName OptionPinFriendlyNamePrefix(TEXT("Option "));
 const FName ConditionPinFriendlyNamePrefix(TEXT("Condition "));
 
-UK2Node_MultiConditionalSelect::UK2Node_MultiConditionalSelect(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+UK2Node_MultiConditionalSelect::UK2Node_MultiConditionalSelect(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
 	NodeContextMenuSectionName = "K2NodeMultiConditionalSelect";
 	NodeContextMenuSectionLabel = LOCTEXT("MultiConditionalSelect", "Multi Conditional Select");
@@ -150,6 +151,7 @@ FText UK2Node_MultiConditionalSelect::GetMenuCategory() const
 	return FEditorCategoryUtils::GetCommonCategory(FCommonEditorCategory::Utilities);
 }
 
+// clang-format off
 /*
 * Internal node structure
 
@@ -198,6 +200,7 @@ Condition 1 | +-----+ | [1]            |     | | Item To Find                  |
             |                                                                                                                       |
             +-----------------------------------------------------------------------------------------------------------------------+
  */
+// clang-format on
 void UK2Node_MultiConditionalSelect::ExpandNode(FKismetCompilerContext& CompilerContext, UEdGraph* SourceGraph)
 {
 	Super::ExpandNode(CompilerContext, SourceGraph);

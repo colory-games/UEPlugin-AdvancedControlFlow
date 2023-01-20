@@ -14,7 +14,6 @@
 
 #include "K2Node_MultiConditionalSelect.generated.h"
 
-
 UCLASS(MinimalAPI, meta = (Keywords = "Select MultiConditionalSelect"))
 class UK2Node_MultiConditionalSelect : public UK2Node_CasePairedPinsNode
 {
