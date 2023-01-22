@@ -1,7 +1,7 @@
 /*!
  * AdvancedControlFlow
  *
- * Copyright (c) 2022 Colory Games
+ * Copyright (c) 2022-2023 Colory Games
  *
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,7 +21,7 @@
 #include "KismetCompiler.h"
 #include "KismetCompilerMisc.h"
 
-#define LOCTEXT_NAMESPACE "K2Node"
+#define LOCTEXT_NAMESPACE "AdvancedControlFlow"
 
 class FKCHandler_MultiBranch : public FNodeHandlingFunctor
 {
@@ -97,7 +97,7 @@ public:
 				continue;
 			}
 
-			UEdGraphPin* CondPin = MultiBranchNode->GetCondPinFromExecPin(ExecPin);
+			UEdGraphPin* CondPin = MultiBranchNode->GetCaseKeyPinFromCaseValuePin(ExecPin);
 			UEdGraphPin* CondNet = FEdGraphUtilities::GetNetFromPin(CondPin);
 			FBPTerminal* CondValueTerm = Context.NetMap.FindRef(CondNet);
 
@@ -129,7 +129,11 @@ UK2Node_MultiBranch::UK2Node_MultiBranch(const FObjectInitializer& ObjectInitial
 	ConditionPreProcessFuncClass = UKismetMathLibrary::StaticClass();
 	ConditionPreProcessFuncName = TEXT("Not_PreBool");
 	NodeContextMenuSectionName = "K2NodeMultiBranch";
-	NodeContextMenuSectionLabel = "Multi Branch";
+	NodeContextMenuSectionLabel = LOCTEXT("MultiBranch", "MultiBranch");
+	CaseKeyPinNamePrefix = TEXT("CaseCond");
+	CaseValuePinNamePrefix = TEXT("CaseExec");
+	CaseKeyPinFriendlyNamePrefix = TEXT("Condition ");
+	CaseValuePinFriendlyNamePrefix = TEXT(" ");
 }
 
 void UK2Node_MultiBranch::AllocateDefaultPins()
@@ -144,13 +148,15 @@ void UK2Node_MultiBranch::AllocateDefaultPins()
 	// 2+N+1 - 2*(N+1): Case Execution (Out, Exec)
 
 	CreateFunctionPin();
+	CreateExecTriggeringPin();
+	CreateDefaultExecPin();
 
 	Super::AllocateDefaultPins();
 }
 
 FText UK2Node_MultiBranch::GetTooltipText() const
 {
-	return LOCTEXT("MultiBranchStatement_Tooltip", "Multi Branch Statement\nExecution goes where condition is true");
+	return LOCTEXT("MultiBranchStatement_Tooltip", "Multi-Branch Statement\nExecution goes where condition is true");
 }
 
 FLinearColor UK2Node_MultiBranch::GetNodeTitleColor() const
@@ -160,7 +166,7 @@ FLinearColor UK2Node_MultiBranch::GetNodeTitleColor() const
 
 FText UK2Node_MultiBranch::GetNodeTitle(ENodeTitleType::Type TitleType) const
 {
-	return LOCTEXT("MultiBranch", "MultiBranch");
+	return LOCTEXT("MultiBranch", "Multi-Branch");
 }
 
 FSlateIcon UK2Node_MultiBranch::GetIconAndTint(FLinearColor& OutColor) const
@@ -172,6 +178,8 @@ FSlateIcon UK2Node_MultiBranch::GetIconAndTint(FLinearColor& OutColor) const
 void UK2Node_MultiBranch::ReallocatePinsDuringReconstruction(TArray<UEdGraphPin*>& OldPins)
 {
 	CreateFunctionPin();
+	CreateExecTriggeringPin();
+	CreateDefaultExecPin();
 
 	Super::ReallocatePinsDuringReconstruction(OldPins);
 }
@@ -198,15 +206,35 @@ FText UK2Node_MultiBranch::GetMenuCategory() const
 	return FEditorCategoryUtils::GetCommonCategory(FCommonEditorCategory::FlowControl);
 }
 
-UEdGraphPin* UK2Node_MultiBranch::GetFunctionPin() const
+CasePinPair UK2Node_MultiBranch::AddCasePinPair(int32 CaseIndex)
 {
-	return FindPin(ConditionPreProcessFuncName);
+	CasePinPair Pair;
+	int N = GetCasePinCount();
+
+	{
+		FCreatePinParams Params;
+		Params.Index = 3 + CaseIndex;
+		Pair.Key = CreatePin(
+			EGPD_Input, UEdGraphSchema_K2::PC_Boolean, *GetCasePinName(CaseKeyPinNamePrefix.ToString(), CaseIndex), Params);
+		Pair.Key->PinFriendlyName =
+			FText::AsCultureInvariant(GetCasePinFriendlyName(CaseKeyPinFriendlyNamePrefix.ToString(), CaseIndex));
+	}
+	{
+		FCreatePinParams Params;
+		Params.Index = 3 + N + 1 + CaseIndex;
+		Pair.Value = CreatePin(
+			EGPD_Output, UEdGraphSchema_K2::PC_Exec, *GetCasePinName(CaseValuePinNamePrefix.ToString(), CaseIndex), Params);
+		Pair.Value->PinFriendlyName =
+			FText::AsCultureInvariant(GetCasePinFriendlyName(CaseValuePinFriendlyNamePrefix.ToString(), CaseIndex));
+	}
+
+	return Pair;
 }
 
 void UK2Node_MultiBranch::CreateFunctionPin()
 {
 	FCreatePinParams Params;
-	Params.Index = AllocateNonCasePinIndex();
+	Params.Index = 0;
 	UEdGraphPin* FunctionPin =
 		CreatePin(EGPD_Input, UEdGraphSchema_K2::PC_Object, ConditionPreProcessFuncClass, ConditionPreProcessFuncName, Params);
 	FunctionPin->bDefaultValueIsReadOnly = true;
@@ -226,6 +254,31 @@ void UK2Node_MultiBranch::CreateFunctionPin()
 			}
 		}
 	}
+}
+
+void UK2Node_MultiBranch::CreateExecTriggeringPin()
+{
+	FCreatePinParams Params;
+	Params.Index = 1;
+	CreatePin(EGPD_Input, UEdGraphSchema_K2::PC_Exec, UEdGraphSchema_K2::PN_Execute, Params);
+}
+
+void UK2Node_MultiBranch::CreateDefaultExecPin()
+{
+	FCreatePinParams Params;
+	Params.Index = 2;
+	UEdGraphPin* DefaultExecPin = CreatePin(EGPD_Output, UEdGraphSchema_K2::PC_Exec, DefaultExecPinName, Params);
+	DefaultExecPin->PinFriendlyName = FText::AsCultureInvariant(DefaultExecPinFriendlyName.ToString());
+}
+
+UEdGraphPin* UK2Node_MultiBranch::GetDefaultExecPin() const
+{
+	return FindPin(DefaultExecPinName);
+}
+
+UEdGraphPin* UK2Node_MultiBranch::GetFunctionPin() const
+{
+	return FindPin(ConditionPreProcessFuncName);
 }
 
 #undef LOCTEXT_NAMESPACE

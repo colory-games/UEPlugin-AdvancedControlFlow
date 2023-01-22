@@ -4,22 +4,22 @@
 
 [![](https://img.youtube.com/vi/c9moKtYbnvA/0.jpg)](https://www.youtube.com/watch?v=c9moKtYbnvA)
 
-## MultiBranch
+## Multi-Branch
 
-MultiBranch node realizes multiple conditional branches (like if-elseif-else statement).  
+Multi-Branch node realizes multiple conditional branches (like if-elseif-else statement).  
 Comparision to the implementation on the vanilla Unreal Engine is as follows.
 
-![Vanila vs MultiBranch](images/tutorial/vanilla_vs_multibranch.png)
+![Vanila vs Multi-Branch](images/tutorial/vanilla_vs_multibranch.png)
 
 ### Usage
 
-1. Search and place MultiBranch node on the Blueprint editor.
+1. Search and place Multi-Branch node on the Blueprint editor.
 2. Click [Add Pin] to add a pin pair (condition and execution).
 3. Build a logic by connecting among the nodes.
 
 ### Comparison to C++ code
 
-![MultiBranch](images/tutorial/multibranch.png)
+![Multi-Branch](images/tutorial/multibranch.png)
 
 Above Blueprint is same as below code in C++.
 
@@ -35,7 +35,7 @@ if (Condition_0) {
 
 ### Additional Info
 
-* Some useful menu for adding/removing pins by right mouse click on the MultiBranch node.
+* Some useful menu for adding/removing pins by right mouse click on the Multi-Branch node.
 
 ## Conditional Sequence
 
@@ -46,7 +46,7 @@ Comparision to the implementation on the vanilla Unreal Engine is as follows.
 
 ### Usage
 
-1. Search and place `Conditional Sequence` node on the Blueprint editor.
+1. Search and place Conditional Sequence node on the Blueprint editor.
 2. Click [Add Pin] to add a pin pair (condition and execution).
 3. Build a logic by connecting among the nodes.
 
@@ -69,3 +69,20 @@ UKismetSystemLibrary::PrintString(GEngine->GetWorld(), "Default");
 ### Additional Info
 
 * Some useful menu for adding/removing pins by right mouse click on the Conditional Sequence node.
+
+## Multi-Conditional Select
+
+Multi-Conditional Select node returns the option where the condition is true first.
+Comparison to the implementation on the vanila Unreal Engine is as follows.
+
+![Vanila vs Multi-Conditional Select](images/tutorial/vanilla_vs_multi-conditional-select.png)
+
+### Usage
+
+1. Search and place the Multi-Conditional Select node in the Blueprint editor.
+2. Click [Add Pin] to add a pin pair (option and condition).
+3. Build a logic by connecting between the nodes.
+
+### Additional Info
+
+* Right mouse clicking on the Condition Sequence node opens a useful menu for adding/removing pins.

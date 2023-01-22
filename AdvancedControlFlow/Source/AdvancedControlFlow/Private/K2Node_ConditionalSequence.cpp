@@ -1,7 +1,7 @@
 ﻿/*!
  * AdvancedControlFlow
  *
- * Copyright (c) 2022 Colory Games
+ * Copyright (c) 2022-2023 Colory Games
  *
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,12 +17,32 @@
 #include "K2Node_IfThenElse.h"
 #include "KismetCompiler.h"
 
-#define LOCTEXT_NAMESPACE "K2Node"
+#define LOCTEXT_NAMESPACE "AdvancedControlFlow"
 
 UK2Node_ConditionalSequence::UK2Node_ConditionalSequence(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	NodeContextMenuSectionName = "K2NodeConditionalSequence";
-	NodeContextMenuSectionLabel = "Conditional Sequence";
+	NodeContextMenuSectionLabel = LOCTEXT("ConditionalSequence", "Conditional Sequence");
+	CaseKeyPinNamePrefix = TEXT("CaseCond");
+	CaseValuePinNamePrefix = TEXT("CaseExec");
+	CaseKeyPinFriendlyNamePrefix = TEXT("Condition ");
+	CaseValuePinFriendlyNamePrefix = TEXT(" ");
+}
+
+void UK2Node_ConditionalSequence::AllocateDefaultPins()
+{
+	// Pin structure
+	//   N: Number of case pin pair
+	// -----
+	// 0: Execution Triggering (In, Exec)
+	// 1: Default Execution (Out, Exec)
+	// 2 - 1+N: Case Conditional (In, Boolean)
+	// 1+N+1 - 2*(N+1)-1: Case Execution (Out, Exec)
+
+	CreateExecTriggeringPin();
+	CreateDefaultExecPin();
+
+	Super::AllocateDefaultPins();
 }
 
 FText UK2Node_ConditionalSequence::GetTooltipText() const
@@ -45,6 +65,14 @@ FSlateIcon UK2Node_ConditionalSequence::GetIconAndTint(FLinearColor& OutColor) c
 {
 	static FSlateIcon Icon("EditorStyle", "GraphEditor.Sequence_16x");
 	return Icon;
+}
+
+void UK2Node_ConditionalSequence::ReallocatePinsDuringReconstruction(TArray<UEdGraphPin*>& OldPins)
+{
+	CreateExecTriggeringPin();
+	CreateDefaultExecPin();
+
+	Super::ReallocatePinsDuringReconstruction(OldPins);
 }
 
 void UK2Node_ConditionalSequence::ExpandNode(FKismetCompilerContext& CompilerContext, UEdGraph* SourceGraph)
@@ -102,6 +130,51 @@ void UK2Node_ConditionalSequence::GetMenuActions(FBlueprintActionDatabaseRegistr
 FText UK2Node_ConditionalSequence::GetMenuCategory() const
 {
 	return FEditorCategoryUtils::GetCommonCategory(FCommonEditorCategory::FlowControl);
+}
+
+void UK2Node_ConditionalSequence::CreateExecTriggeringPin()
+{
+	FCreatePinParams Params;
+	Params.Index = 0;
+	CreatePin(EGPD_Input, UEdGraphSchema_K2::PC_Exec, UEdGraphSchema_K2::PN_Execute, Params);
+}
+
+void UK2Node_ConditionalSequence::CreateDefaultExecPin()
+{
+	FCreatePinParams Params;
+	Params.Index = 1;
+	UEdGraphPin* DefaultExecPin = CreatePin(EGPD_Output, UEdGraphSchema_K2::PC_Exec, DefaultExecPinName, Params);
+	DefaultExecPin->PinFriendlyName = FText::AsCultureInvariant(DefaultExecPinFriendlyName.ToString());
+}
+
+CasePinPair UK2Node_ConditionalSequence::AddCasePinPair(int32 CaseIndex)
+{
+	CasePinPair Pair;
+	int N = GetCasePinCount();
+
+	{
+		FCreatePinParams Params;
+		Params.Index = 2 + CaseIndex;
+		Pair.Key = CreatePin(
+			EGPD_Input, UEdGraphSchema_K2::PC_Boolean, *GetCasePinName(CaseKeyPinNamePrefix.ToString(), CaseIndex), Params);
+		Pair.Key->PinFriendlyName =
+			FText::AsCultureInvariant(GetCasePinFriendlyName(CaseKeyPinFriendlyNamePrefix.ToString(), CaseIndex));
+	}
+	{
+		FCreatePinParams Params;
+		Params.Index = 2 + N + 1 + CaseIndex;
+		Pair.Value = CreatePin(
+			EGPD_Output, UEdGraphSchema_K2::PC_Exec, *GetCasePinName(CaseValuePinNamePrefix.ToString(), CaseIndex), Params);
+		Pair.Value->PinFriendlyName =
+			FText::AsCultureInvariant(GetCasePinFriendlyName(CaseValuePinFriendlyNamePrefix.ToString(), CaseIndex));
+	}
+
+	return Pair;
+}
+
+UEdGraphPin* UK2Node_ConditionalSequence::GetDefaultExecPin() const
+{
+	return FindPin(DefaultExecPinName);
 }
 
 #undef LOCTEXT_NAMESPACE

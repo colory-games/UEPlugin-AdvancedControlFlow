@@ -1,7 +1,7 @@
 /*!
  * AdvancedControlFlow
  *
- * Copyright (c) 2022 Colory Games
+ * Copyright (c) 2022-2023 Colory Games
  *
  * This software is released under the MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,9 +12,12 @@
 #include "EdGraphUtilities.h"
 #include "K2Node_ConditionalSequence.h"
 #include "K2Node_MultiBranch.h"
-#include "SGraphNodeCondExecPairedNode.h"
+#include "K2Node_MultiConditionalSelect.h"
+#include "SGraphNodeConditionalSequence.h"
+#include "SGraphNodeMultiBranch.h"
+#include "SGraphNodeMultiConditionalSelect.h"
 
-#define LOCTEXT_NAMESPACE "FAdvancedControlFlowModule"
+#define LOCTEXT_NAMESPACE "AdvancedControlFlow"
 
 class FGraphPanelNodeFactory_AdvancedControlFlow : public FGraphPanelNodeFactory
 {
@@ -22,11 +25,15 @@ class FGraphPanelNodeFactory_AdvancedControlFlow : public FGraphPanelNodeFactory
 	{
 		if (UK2Node_MultiBranch* MultiBranch = Cast<UK2Node_MultiBranch>(Node))
 		{
-			return SNew(SGraphNodeCondExecPairedNode, MultiBranch);
+			return SNew(SGraphNodeMultiBranch, MultiBranch);
 		}
 		else if (UK2Node_ConditionalSequence* ConditionalSequence = Cast<UK2Node_ConditionalSequence>(Node))
 		{
-			return SNew(SGraphNodeCondExecPairedNode, ConditionalSequence);
+			return SNew(SGraphNodeConditionalSequence, ConditionalSequence);
+		}
+		else if (UK2Node_MultiConditionalSelect* MultiConditionalSelect = Cast<UK2Node_MultiConditionalSelect>(Node))
+		{
+			return SNew(SGraphNodeMultiConditionalSelect, MultiConditionalSelect);
 		}
 
 		return nullptr;
