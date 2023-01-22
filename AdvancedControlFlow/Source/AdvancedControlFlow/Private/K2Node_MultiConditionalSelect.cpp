@@ -338,6 +338,17 @@ void UK2Node_MultiConditionalSelect::ExpandNode(FKismetCompilerContext& Compiler
 	BreakAllNodeLinks();
 }
 
+bool UK2Node_MultiConditionalSelect::IsConnectionDisallowed(const UEdGraphPin* MyPin, const UEdGraphPin* OtherPin, FString& OutReason) const
+{
+	if (OtherPin && (OtherPin->PinType.PinCategory == UEdGraphSchema_K2::PC_Exec))
+	{
+		OutReason = LOCTEXT("ExecConnectionDisallowd", "Can't connect with Exec pin.").ToString();
+		return true;
+	}
+
+	return Super::IsConnectionDisallowed(MyPin, OtherPin, OutReason);
+}
+
 void UK2Node_MultiConditionalSelect::CreateDefaultOptionPin()
 {
 	FCreatePinParams Params;

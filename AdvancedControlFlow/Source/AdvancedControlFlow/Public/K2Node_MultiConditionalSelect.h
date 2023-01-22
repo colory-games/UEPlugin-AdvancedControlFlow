@@ -36,6 +36,7 @@ class UK2Node_MultiConditionalSelect : public UK2Node_CasePairedPinsNode
 	{
 		return true;
 	}
+	virtual bool IsConnectionDisallowed(const UEdGraphPin* MyPin, const UEdGraphPin* OtherPin, FString& OutReason) const;
 
 	// Internal functions.
 	void CreateDefaultOptionPin();
