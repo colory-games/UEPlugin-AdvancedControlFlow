@@ -338,7 +338,8 @@ void UK2Node_MultiConditionalSelect::ExpandNode(FKismetCompilerContext& Compiler
 	BreakAllNodeLinks();
 }
 
-bool UK2Node_MultiConditionalSelect::IsConnectionDisallowed(const UEdGraphPin* MyPin, const UEdGraphPin* OtherPin, FString& OutReason) const
+bool UK2Node_MultiConditionalSelect::IsConnectionDisallowed(
+	const UEdGraphPin* MyPin, const UEdGraphPin* OtherPin, FString& OutReason) const
 {
 	if (OtherPin && (OtherPin->PinType.PinCategory == UEdGraphSchema_K2::PC_Exec))
 	{
