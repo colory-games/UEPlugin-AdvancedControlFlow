@@ -90,17 +90,17 @@ void UK2Node_MultiConditionalSelect::PinConnectionListChanged(UEdGraphPin* Pin)
 
 	if (Pin->LinkedTo.Num() == 0)
 	{
-		return;		// Ignore the disconnection event.
+		return;    // Ignore the disconnection event.
 	}
 
 	if (IsCaseValuePin(Pin))
 	{
-		return;		// Ignore condition pin connection.
+		return;    // Ignore condition pin connection.
 	}
 
 	if (GetDefaultOptionPin()->PinType.PinCategory != UEdGraphSchema_K2::PC_Wildcard)
 	{
-		return;		// Pin type has already fixed.
+		return;    // Pin type has already fixed.
 	}
 
 	Super::PinConnectionListChanged(Pin);
