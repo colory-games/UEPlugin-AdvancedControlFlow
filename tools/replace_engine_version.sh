@@ -6,7 +6,7 @@ set -eEu
 
 SUPPORTED_VERSIONS=(
     "4.26.0" "4.27.0"
-    "5.0.0" "5.1.0"
+    "5.0.0" "5.1.0" "5.2.0"
 )
 
 function usage() {
