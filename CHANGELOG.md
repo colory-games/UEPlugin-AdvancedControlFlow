@@ -1,6 +1,12 @@
 # Change Log
 
-## [Unreleased](https://github.com/colory-games/UEPlugin-AdvancedControlFlow/compare/v1.2.0...main)
+## [Unreleased](https://github.com/colory-games/UEPlugin-AdvancedControlFlow/compare/v1.3.0...main)
+
+## [Version 1.3.0](https://github.com/colory-games/UEPlugin-AdvancedControlFlow/compare/v1.2.0...v1.3.0) - 2023.5.20
+
+### Updated Features
+
+* Support on Unreal Engine 5.2
 
 ## [Version 1.2.0](https://github.com/colory-games/UEPlugin-AdvancedControlFlow/compare/v1.1.1...v1.2.0) - 2023.2.1
 
