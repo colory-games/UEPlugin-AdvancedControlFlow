@@ -92,10 +92,6 @@ public:
 			{
 				continue;
 			}
-			if (ExecPin->LinkedTo.Num() == 0)
-			{
-				continue;
-			}
 
 			UEdGraphPin* CondPin = MultiBranchNode->GetCaseKeyPinFromCaseValuePin(ExecPin);
 			UEdGraphPin* CondNet = FEdGraphUtilities::GetNetFromPin(CondPin);
