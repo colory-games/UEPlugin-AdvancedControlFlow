@@ -49,7 +49,7 @@ bool FFuntionalTestMultiBranch::RunTest(const FString& Parameters)
 
 bool FFuntionalTestConditionalSequence::RunTest(const FString& Parameters)
 {
-	UBlueprint* Blueprint = LoadObject<UBlueprint>(nullptr, TEXT("/Game/FunctionalTest/ConditionalSequenc.ConditionalSequenc"));
+	UBlueprint* Blueprint = LoadObject<UBlueprint>(nullptr, TEXT("/Game/FunctionalTest/ConditionalSequence.ConditionalSequence"));
 
 	return TestCommon(this, Blueprint);
 }
