@@ -6,8 +6,7 @@
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FFuntionalTestMultiBranch, "AdvancedControlFlow.FunctionalTest.MultiBranch",
 	EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter);
-IMPLEMENT_SIMPLE_AUTOMATION_TEST(FFuntionalTestConditionalSequence,
-	"AdvancedControlFlow.FunctionalTest.ConditionalSequence",
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FFuntionalTestConditionalSequence, "AdvancedControlFlow.FunctionalTest.ConditionalSequence",
 	EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter);
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FFuntionalTestMultiConditionalSelect, "AdvancedControlFlow.FunctionalTest.MultiConditionalSelect",
 	EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter);
@@ -50,15 +49,15 @@ bool FFuntionalTestMultiBranch::RunTest(const FString& Parameters)
 
 bool FFuntionalTestConditionalSequence::RunTest(const FString& Parameters)
 {
-	UBlueprint* Blueprint =
-		LoadObject<UBlueprint>(nullptr, TEXT("/Game/FunctionalTest/ConditionalSequenc.ConditionalSequenc"));
+	UBlueprint* Blueprint = LoadObject<UBlueprint>(nullptr, TEXT("/Game/FunctionalTest/ConditionalSequenc.ConditionalSequenc"));
 
 	return TestCommon(this, Blueprint);
 }
 
 bool FFuntionalTestMultiConditionalSelect::RunTest(const FString& Parameters)
 {
-	UBlueprint* Blueprint = LoadObject<UBlueprint>(nullptr, TEXT("/Game/FunctionalTest/MultiConditionalSelect.MultiConditionalSelect"));
+	UBlueprint* Blueprint =
+		LoadObject<UBlueprint>(nullptr, TEXT("/Game/FunctionalTest/MultiConditionalSelect.MultiConditionalSelect"));
 
 	return TestCommon(this, Blueprint);
 }
