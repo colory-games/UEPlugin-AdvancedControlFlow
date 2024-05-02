@@ -11,6 +11,7 @@
 
 #include "K2Node_ConditionalSequence.h"
 
+#include "BlueprintActionDatabaseRegistrar.h"
 #include "BlueprintNodeSpawner.h"
 #include "EditorCategoryUtils.h"
 #include "K2Node_ExecutionSequence.h"
