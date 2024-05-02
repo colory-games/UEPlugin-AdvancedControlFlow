@@ -69,7 +69,7 @@ void SGraphNodeMultiBranch::CreatePinWidgets()
 #else
 				SNew(SImage).Image(FEditorStyle::GetBrush("Graph.Pin.DefaultPinSeparator"))
 #endif
-			];
+		];
 
 		TSharedPtr<SGraphPin> NewPin = SNew(SGraphPinExecMultiBranch, DefaultPin);
 		this->AddPin(NewPin.ToSharedRef());

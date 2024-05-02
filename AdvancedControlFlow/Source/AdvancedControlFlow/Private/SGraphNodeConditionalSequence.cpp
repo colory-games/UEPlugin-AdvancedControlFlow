@@ -69,7 +69,7 @@ void SGraphNodeConditionalSequence::CreatePinWidgets()
 #else
 				SNew(SImage).Image(FEditorStyle::GetBrush("Graph.Pin.DefaultPinSeparator"))
 #endif
-			];
+		];
 
 		TSharedPtr<SGraphPin> NewPin = SNew(SGraphPinExecConditionalSequence, DefaultPin);
 		this->AddPin(NewPin.ToSharedRef());
