@@ -63,7 +63,13 @@ void SGraphNodeMultiBranch::CreatePinWidgets()
 			.AutoHeight()
 			.HAlign(HAlign_Right)
 			.VAlign(VAlign_Center)
-			.Padding(1.0f)[SNew(SImage).Image(FEditorStyle::GetBrush("Graph.Pin.DefaultPinSeparator"))];
+			.Padding(1.0f)[
+#if UE_VERSION_NEWER_THAN(5, 1, 0)
+				SNew(SImage).Image(FAppStyle::GetBrush("Graph.Pin.DefaultPinSeparator"))
+#else
+				SNew(SImage).Image(FEditorStyle::GetBrush("Graph.Pin.DefaultPinSeparator"))
+#endif
+		];
 
 		TSharedPtr<SGraphPin> NewPin = SNew(SGraphPinExecMultiBranch, DefaultPin);
 		this->AddPin(NewPin.ToSharedRef());

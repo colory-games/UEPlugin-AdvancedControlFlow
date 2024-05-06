@@ -11,6 +11,9 @@
 
 #include "SGraphNodeMultiConditionalSelect.h"
 
+#include "K2Node_MultiConditionalSelect.h"
+#include "NodeFactory.h"
+
 void SGraphNodeMultiConditionalSelect::Construct(const FArguments& InArgs, UK2Node_MultiConditionalSelect* InNode)
 {
 	this->GraphNode = InNode;

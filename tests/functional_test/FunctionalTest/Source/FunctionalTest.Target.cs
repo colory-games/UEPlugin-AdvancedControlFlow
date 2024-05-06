@@ -8,7 +8,7 @@ public class FunctionalTestTarget : TargetRules
 	public FunctionalTestTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
-		DefaultBuildSettings = BuildSettingsVersion.V2;
+		DefaultBuildSettings = BuildSettingsVersion.Latest;
 		ExtraModuleNames.Add("FunctionalTest");
 	}
 }

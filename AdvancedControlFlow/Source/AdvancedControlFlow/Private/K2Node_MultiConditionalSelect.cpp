@@ -13,6 +13,7 @@
 
 #include "BlueprintNodeSpawner.h"
 #include "EditorCategoryUtils.h"
+#include "GraphEditorSettings.h"
 #include "K2Node_CallFunction.h"
 #include "K2Node_MakeArray.h"
 #include "K2Node_Select.h"
