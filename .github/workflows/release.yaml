@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+      - 'release/v**'
+      - 'run-ci/**'
     tags:
       - 'v*'
   pull_request:
