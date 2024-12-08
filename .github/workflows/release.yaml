@@ -47,7 +47,7 @@ jobs:
           mv AdvancedControlFlow_UE${{ matrix.unreal_engine_version }}_${{ matrix.version }}.zip release-plugin-${{ matrix.version }}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: AdvancedControlFlow_${{ matrix.version }}
           path: "release-plugin-${{ matrix.version }}"
@@ -66,7 +66,7 @@ jobs:
           mv samples/SampleProject.zip release-sample
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: SampleProject
           path: "release-sample"
@@ -80,7 +80,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Fetch Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           path: dist
       - name: Install hub command
