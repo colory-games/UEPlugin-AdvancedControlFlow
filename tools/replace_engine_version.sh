@@ -18,7 +18,7 @@ if [ $# -ne 2 ]; then
 fi
 
 source_dir=${1}
-engine_version=${2}
+engine_version="${2%.*}.0"
 
 supported=0
 for v in "${SUPPORTED_VERSIONS[@]}"; do

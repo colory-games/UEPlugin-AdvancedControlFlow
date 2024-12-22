@@ -19,7 +19,7 @@ if [ $# -ne 4 ]; then
 fi
 
 SOURCE_DIR=${1}
-ENGINE_VERSION=${2}
+ENGINE_VERSION="${2%.*}.0"
 FULL=0
 if [ "${3}" = "full" ]; then
     FULL=1
