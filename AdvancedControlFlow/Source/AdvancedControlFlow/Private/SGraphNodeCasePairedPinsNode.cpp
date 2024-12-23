@@ -14,6 +14,7 @@
 #include "GraphEditorSettings.h"
 #include "K2Node_CasePairedPinsNode.h"
 #include "Kismet2/BlueprintEditorUtils.h"
+#include "ScopedTransaction.h"
 
 void SGraphNodeCasePairedPinsNode::Construct(const FArguments& InArgs, UK2Node_CasePairedPinsNode* InNode)
 {
