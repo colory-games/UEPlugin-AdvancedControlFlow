@@ -75,7 +75,9 @@ jobs:
               -pak \
               -archive \
               -archivedirectory=/tmp/Packaged \
-              -ddc=noshared
+              -ddc=noshared \
+              -DDC-ForceMemoryCache \
+              -ddc=NoZenLocalFallback
       - run:
           name: "Functional test against Plugin"
           # DerivedDataCache must be deleted due to a disk space shortage.
