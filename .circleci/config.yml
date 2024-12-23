@@ -67,7 +67,7 @@ jobs:
               -project=${PWD}/tests/functional_test/FunctionalTest/FunctionalTest.uproject \
               -noP4 \
               -nodebuginfo \
-              -cook \
+              -skipcook \
               -build \
               -stage \
               -prereqs \
