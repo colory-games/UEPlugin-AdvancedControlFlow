@@ -75,11 +75,13 @@ jobs:
       - run:
           name: "Functional test against Plugin"
           command: |
+            rm -rf ${PWD}/tests/functional_test/FunctionalTest/DerivedDataCache
             /home/ue4/UnrealEngine/Engine/Binaries/Linux/UnrealEditor \
               ${PWD}/tests/functional_test/FunctionalTest/FunctionalTest.uproject \
               -unattended \
               -nopause \
               -NullRHI \
+              -DDC-ForceMemoryCache \
               -ExecCmds="Automation RunTests AdvancedControlFlow; Quit" \
               -testexit="Automation Test Queue Empty" \
               -log=RunTests.log \
