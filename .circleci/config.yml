@@ -56,7 +56,6 @@ jobs:
       - run:
           name: "Build project"
           command: |
-            echo "HOGE"
             /home/ue4/UnrealEngine/Engine/Build/BatchFiles/RunUAT.sh BuildCookRun \
               -utf8output \
               -platform=Linux \
@@ -73,7 +72,7 @@ jobs:
               -pak \
               -archive \
               -archivedirectory=/tmp/Packaged \
-              -ddc=noshared
+              -ddc=noshared,NoZenLocalFallback
       - run:
           name: "Functional test against Plugin"
           # DerivedDataCache must be deleted due to a disk space shortage.
