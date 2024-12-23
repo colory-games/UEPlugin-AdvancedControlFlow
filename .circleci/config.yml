@@ -80,6 +80,7 @@ jobs:
               -unattended \
               -nopause \
               -NullRHI \
+              -DDC-ForceMemoryCache \
               -ExecCmds="Automation RunTests AdvancedControlFlow; Quit" \
               -testexit="Automation Test Queue Empty" \
               -log=RunTests.log \
