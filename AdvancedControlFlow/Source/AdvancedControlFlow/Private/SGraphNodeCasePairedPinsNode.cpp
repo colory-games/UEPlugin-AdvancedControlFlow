@@ -7,8 +7,6 @@
  * https://opensource.org/licenses/MIT
  */
 
-#pragma once
-
 #include "SGraphNodeCasePairedPinsNode.h"
 
 #include "DetailLayoutBuilder.h"

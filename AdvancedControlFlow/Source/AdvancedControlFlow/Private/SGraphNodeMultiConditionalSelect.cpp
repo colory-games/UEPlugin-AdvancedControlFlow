@@ -7,8 +7,6 @@
  * https://opensource.org/licenses/MIT
  */
 
-#pragma once
-
 #include "SGraphNodeMultiConditionalSelect.h"
 
 #include "K2Node_MultiConditionalSelect.h"
