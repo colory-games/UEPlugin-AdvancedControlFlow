@@ -56,6 +56,7 @@ jobs:
       - run:
           name: "Build project"
           command: |
+            echo "HOGE"
             /home/ue4/UnrealEngine/Engine/Build/BatchFiles/RunUAT.sh BuildCookRun \
               -utf8output \
               -platform=Linux \
@@ -71,11 +72,16 @@ jobs:
               -prereqs \
               -pak \
               -archive \
-              -archivedirectory=/tmp/Packaged
+              -archivedirectory=/tmp/Packaged \
+              -ddc=noshared
       - run:
           name: "Functional test against Plugin"
+          # DerivedDataCache must be deleted due to a disk space shortage.
+          # Ref: https://forums.unrealengine.com/t/unreal-5-4-crash-will-not-start-deriveddatacache/1776423
+          # Ref: https://www.reddit.com/r/unrealengine/comments/1bs0uel/unreal_54_crashes_on_launch/
           command: |
             df -h
+            rm -rf /home/ue4/UnrealEngine/Engine/DerivedDataCache
             rm -rf ${PWD}/tests/functional_test/FunctionalTest/DerivedDataCache
             /home/ue4/UnrealEngine/Engine/Binaries/Linux/UnrealEditor \
               ${PWD}/tests/functional_test/FunctionalTest/FunctionalTest.uproject \
@@ -83,6 +89,7 @@ jobs:
               -nopause \
               -NullRHI \
               -DDC-ForceMemoryCache \
+              -ddc=NoZenLocalFallback \
               -ExecCmds="Automation RunTests AdvancedControlFlow; Quit" \
               -testexit="Automation Test Queue Empty" \
               -log=RunTests.log \
