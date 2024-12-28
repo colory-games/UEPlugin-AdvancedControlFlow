@@ -11,7 +11,7 @@
   "DocsURL": "https://github.com/colory-games/UEPlugin-AdvancedControlFlow",
   "MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/ee3ad06d0d344b4ca1250d135e1df7e2",
   "SupportURL": "https://github.com/colory-games/UEPlugin-AdvancedControlFlow",
-  "CanContainContent": true,
+  "CanContainContent": false,
   "IsBetaVersion": false,
   "Installed": false,
   "Modules": [
