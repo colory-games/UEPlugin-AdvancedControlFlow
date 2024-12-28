@@ -7,7 +7,9 @@ workflows:
             - unreal-engine-ci
           matrix:
             parameters:
-              # TODO: The container image is not supported for 5.4.0.
+              # TODO: 5.4.3 and 5.5.1 will raise an error due to DerivedDataCache.
+              # Ref: https://forums.unrealengine.com/t/unreal-5-4-crash-will-not-start-deriveddatacache/1776423
+              # Ref: https://www.reddit.com/r/unrealengine/comments/1bs0uel/unreal_54_crashes_on_launch/
               unreal-engine-version: ["5.1.0", "5.2.0", "5.3.0"]
               version: ["full"]
       - build-plugin:
@@ -15,8 +17,7 @@ workflows:
             - unreal-engine-ci
           matrix:
             parameters:
-              # TODO: The container image is not supported for 5.4.0.
-              unreal-engine-version: ["4.27.0", "5.0.0", "5.1.0", "5.2.0", "5.3.0"]
+              unreal-engine-version: ["4.27.0", "5.0.0", "5.1.0", "5.2.0", "5.3.0", "5.4.3", "5.5.1"]
               version: ["free", "full"]
       - build-sample:
           context:

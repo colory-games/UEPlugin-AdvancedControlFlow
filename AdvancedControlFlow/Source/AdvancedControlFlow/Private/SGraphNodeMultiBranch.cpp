@@ -7,8 +7,6 @@
  * https://opensource.org/licenses/MIT
  */
 
-#pragma once
-
 #include "SGraphNodeMultiBranch.h"
 
 #include "K2Node_MultiBranch.h"

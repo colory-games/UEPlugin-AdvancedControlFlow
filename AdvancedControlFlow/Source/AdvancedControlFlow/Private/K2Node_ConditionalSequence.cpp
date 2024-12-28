@@ -7,8 +7,6 @@
  * https://opensource.org/licenses/MIT
  */
 
-#pragma once
-
 #include "K2Node_ConditionalSequence.h"
 
 #include "BlueprintActionDatabaseRegistrar.h"
