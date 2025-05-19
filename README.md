@@ -21,7 +21,7 @@ By using this plugin, you can realize this case with only one Multi-Branch node.
 
 This plugin supports on the below environment.
 
-* Unreal Engine Version: 4.26-4.27 / 5.0-5.5
+* Unreal Engine Version: 4.26-4.27 / 5.0-5.6
 * Development Platforms: Windows / macOS / Linux
 * Target Build Platforms: All platforms
 
