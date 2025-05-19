@@ -49,8 +49,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: AdvancedControlFlow_${{ matrix.version }}
-          path: "release-plugin-${{ matrix.version }}"
+          name: AdvancedControlFlow_${{ matrix.version }}_${{ matrix.unreal_engine_version }}
+          path: "release-plugin-${{ matrix.version }}-${{ matrix.unreal_engine_version }}"
 
   sample-pack:
     name: Pack sample sources
@@ -93,7 +93,7 @@ jobs:
         run: |
           set -x
           assets=()
-          for asset in dist/AdvancedControlFlow_free/*.zip; do
+          for asset in dist/AdvancedControlFlow_free_*/*.zip; do
             assets+=("-a" "$asset")
           done
           for asset in dist/SampleProject/*.zip; do
