@@ -42,15 +42,15 @@ jobs:
 
       - name: Compress plugin's sources
         run: |
-          mkdir release-plugin-${{ matrix.version }}-${{ matrix.unreal_engine_version }}
+          mkdir release-plugin-${{ matrix.version }}
           zip -r AdvancedControlFlow_UE${{ matrix.unreal_engine_version }}_${{ matrix.version }}.zip AdvancedControlFlow
-          mv AdvancedControlFlow_UE${{ matrix.unreal_engine_version }}_${{ matrix.version }}.zip release-plugin-${{ matrix.version }}-${{ matrix.unreal_engine_version }}
+          mv AdvancedControlFlow_UE${{ matrix.unreal_engine_version }}_${{ matrix.version }}.zip release-plugin-${{ matrix.version }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: AdvancedControlFlow_${{ matrix.version }}_${{ matrix.unreal_engine_version }}
-          path: "release-plugin-${{ matrix.version }}-${{ matrix.unreal_engine_version }}"
+          name: AdvancedControlFlow_${{ matrix.version }}_{{ matrix.unreal_engine_version }}
+          path: "release-plugin-${{ matrix.version }}"
 
   sample-pack:
     name: Pack sample sources
