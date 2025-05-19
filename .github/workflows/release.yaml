@@ -47,7 +47,7 @@ jobs:
           mv AdvancedControlFlow_UE${{ matrix.unreal_engine_version }}_${{ matrix.version }}.zip release-plugin-${{ matrix.version }}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: AdvancedControlFlow_${{ matrix.version }}
           path: "release-plugin-${{ matrix.version }}"
@@ -66,7 +66,7 @@ jobs:
           mv samples/SampleProject.zip release-sample
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: SampleProject
           path: "release-sample"
