@@ -42,9 +42,9 @@ jobs:
 
       - name: Compress plugin's sources
         run: |
-          mkdir release-plugin-${{ matrix.version }}
+          mkdir release-plugin-${{ matrix.version }}-${{ matrix.unreal_engine_version }}
           zip -r AdvancedControlFlow_UE${{ matrix.unreal_engine_version }}_${{ matrix.version }}.zip AdvancedControlFlow
-          mv AdvancedControlFlow_UE${{ matrix.unreal_engine_version }}_${{ matrix.version }}.zip release-plugin-${{ matrix.version }}
+          mv AdvancedControlFlow_UE${{ matrix.unreal_engine_version }}_${{ matrix.version }}.zip release-plugin-${{ matrix.version }}-${{ matrix.unreal_engine_version }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -80,7 +80,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Fetch Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: dist
       - name: Install hub command
