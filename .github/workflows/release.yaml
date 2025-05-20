@@ -67,6 +67,7 @@ jobs:
         with:
           pattern: AdvancedControlFlow_${{ matrix.version }}_*
           merge-multiple: true
+          path: dist
 
       - name: Move artifacts
         run: |
