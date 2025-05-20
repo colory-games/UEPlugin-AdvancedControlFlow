@@ -49,7 +49,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: AdvancedControlFlow_${{ matrix.version }}_${{ matrix.unreal_engine_version }}
+          name: AdvancedControlFlow_${{ matrix.unreal_engine_version }}_${{ matrix.version }}
           path: "release-plugin-${{ matrix.version }}"
 
   merge-plugin-pack:
@@ -65,15 +65,14 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          pattern: AdvancedControlFlow_${{ matrix.version }}_*
+          pattern: AdvancedControlFlow_*_${{ matrix.version }}
           merge-multiple: true
           path: dist
 
       - name: Move artifacts
         run: |
-          ls dist
           mkdir release-plugin-${{ matrix.version }}
-          mv dist/AdvancedControlFlow_${{ matrix.version }}_* release-plugin-${{ matrix.version }}
+          mv dist/AdvancedControlFlow_*_${{ matrix.version }}.zip release-plugin-${{ matrix.version }}
 
       - name: Updload artifacts
         uses: actions/upload-artifact@v4
@@ -84,7 +83,7 @@ jobs:
       - name: Delete unused artifacts
         uses: geekyeggo/delete-artifact@v5
         with:
-          name: AdvancedControlFlow_${{ matrix.version }}_*
+          name: AdvancedControlFlow_*_${{ matrix.version }}
 
   sample-pack:
     name: Pack sample sources
