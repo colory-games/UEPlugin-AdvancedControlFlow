@@ -71,6 +71,7 @@ jobs:
 
       - name: Move artifacts
         run: |
+          ls dist
           mkdir release-plugin-${{ matrix.version }}
           mv dist/AdvancedControlFlow_${{ matrix.version }}_* release-plugin-${{ matrix.version }}
 
