@@ -68,6 +68,11 @@ jobs:
           pattern: AdvancedControlFlow_${{ matrix.version }}_*
           merge-multiple: true
 
+      - name: Move artifacts
+        run: |
+          mkdir release-plugin-${{ matrix.version }}
+          mv dist/AdvancedControlFlow_${{ matrix.version }}_* release-plugin-${{ matrix.version }}
+
       - name: Updload artifacts
         uses: actions/upload-artifact@v4
         with:
