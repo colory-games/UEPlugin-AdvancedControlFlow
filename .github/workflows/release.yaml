@@ -52,6 +52,33 @@ jobs:
           name: AdvancedControlFlow_${{ matrix.version }}_${{ matrix.unreal_engine_version }}
           path: "release-plugin-${{ matrix.version }}"
 
+  merge-plugin-pack:
+    name: Merge packed plugins
+    runs-on: ubuntu-latest
+    needs: [plugin-pack]
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          ["free", "full"]
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: AdvancedControlFlow_${{ matrix.version }}_*
+          merge-multiple: true
+
+      - name: Updload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: AdvancedControlFlow_${{ matrix.version }}
+          path: "release-plugin-${{ matrix.version }}"
+
+      - name: Delete unused artifacts
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: AdvancedControlFlow_${{ matrix.version }}_*
+
   sample-pack:
     name: Pack sample sources
     runs-on: ubuntu-latest
@@ -73,7 +100,7 @@ jobs:
 
   publish:
     name: Publish
-    needs: [plugin-pack, sample-pack]
+    needs: [merge-plugin-pack, sample-pack]
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
@@ -93,7 +120,7 @@ jobs:
         run: |
           set -x
           assets=()
-          for asset in dist/AdvancedControlFlow_free_*/*.zip; do
+          for asset in dist/AdvancedControlFlow_free/*.zip; do
             assets+=("-a" "$asset")
           done
           for asset in dist/SampleProject/*.zip; do
