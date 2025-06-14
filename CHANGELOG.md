@@ -1,6 +1,12 @@
 # Change Log
 
-## [Unreleased](https://github.com/colory-games/UEPlugin-AdvancedControlFlow/compare/v1.6.0...main)
+## [Unreleased](https://github.com/colory-games/UEPlugin-AdvancedControlFlow/compare/v1.7.0...main)
+
+## [Version 1.7.0](https://github.com/colory-games/UEPlugin-AdvancedControlFlow/compare/v1.6.0...v1.7.0) - 2025.6.13
+
+### Updated Features
+
+* Support on Unreal Engine 5.6
 
 ## [Version 1.6.0](https://github.com/colory-games/UEPlugin-AdvancedControlFlow/compare/v1.5.0...v1.6.0) - 2024.12.30
 
