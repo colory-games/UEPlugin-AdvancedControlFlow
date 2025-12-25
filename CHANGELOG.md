@@ -2,7 +2,7 @@
 
 ## [Unreleased](https://github.com/colory-games/UEPlugin-AdvancedControlFlow/compare/v1.8.0...main)
 
-## [Version 1.8.0](https://github.com/colory-games/UEPlugin-AdvancedControlFlow/compare/v1.7.0...v1.8.0) - 20XX.X.XX
+## [Version 1.8.0](https://github.com/colory-games/UEPlugin-AdvancedControlFlow/compare/v1.7.0...v1.8.0) - 2025.12.25
 
 ### Updated Features
 
